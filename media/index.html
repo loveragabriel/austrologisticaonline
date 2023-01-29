@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name=”description”
+        content="Web app para seguimiento de importación a Ushuaia Tierra del Fuega, Argentina. Logística Internacional de Importación">
+    <meta name="keywords" content="Logistica Internacional, Importacion, Ushuaia, Importacion Ushuaia">
+    <!-- Tab icon -->
+    <link rel="icon" type="image/x-icon" href="./assets/img/Austro-icon.svg">
+    <!-- Style-code -->
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+    <!-- font-awesome -->
+    <script src="https://kit.fontawesome.com/f9bbe18ed9.js" crossorigin="anonymous"></script>
+    <!-- Tab Title -->
+    <title>Austro Logistica</title>
+</head>
+
+<body>
+    <header>
+        <!-- Nav Bar Code -->
+        <nav class="solid-bckg">
+            <i class="fa-solid fa-bars" id="menu-btn"></i>
+            <ul class="navigation-links">
+                <li><a href="#main-about" data-replace="Austro"><span> Austro </span></a></li>
+                <li><a href="#services" data-replace="Servicio"><span> Servicio </span></a></li>
+                <li><a href="#signInForm" data-replace="Contacto"><span> Contacto </span></a></li>
+                <!-- <li><a href="./pages/terms.html" data-replace="Términos"><span> Términos </span></a></li> -->
+            </ul>
+            <div>
+                <a href="./index.html" data-replace="Austro Logística" class="imagotype">
+                    <span> Austro Logística</span>
+                </a>
+            </div>
+            <i class="fa-solid fa-user" id="user-logIn"></i>
+            <a href="./pages/logIn.html">
+                <button class="btn btn-main" id="promptSignIn"> Ingresar</button>
+            </a>
+        </nav>
+        <div id="sidebar">
+            <i class="fa-solid fa-x" id="closeMenu"></i>
+            <ul>
+                <li><a href="./pages/about.html"> Austro </a></li>
+                <li><a href="#"> Servicios </a></li>
+                <li><a href="./pages/contact.html"> Contacto </a></li>
+                <li><a href="./pages/terms.html"> Términos </a></li>
+                <li><a href="./pages/signIn.html    "> Registrarse </a></li>
+            </ul>
+        </div>
+    </header>
+    <!-- Main home page -->
+    <main class="home-section">
+        <!-- Background video for home -->
+        <img src="./assets/img/bck_home.jpg" class="bck_home">
+        <!-- <video src="./assets/video/video_background.mp4" muted autoplay></video> -->
+        <section class="description">
+            <div class="card-home">
+                <p>Seguimiento logístico de Importación al fin del Mundo
+                </p>
+                <a href="#services"> <i class="fa-sharp fa-solid fa-arrow-right"></i></a>
+            </div>
+
+        </section>
+    </main>
+    <!-- Code for delivering on course
+        <section class="PreEntrega2">
+    <section class="cal-import-main">
+        <div class="btn-js">
+            <h4>Cree un nueva Orden para calcular su importación</h4>
+            <button id="new-order" type="submit">Crear Nueva Orden</button>
+        </div>
+    </section>
+    <section class="cal-import-main">
+        <div class="btn-js">
+            <h4>Muestre por consolas las Ordenes Cargadas</h4>
+            <button id="lookShipper" type="submit">Mostrar Ordenes</button>
+        </div>
+        <div class="btn-js">
+           <h4>Inicie el Calculo de su importación</h4>
+            <button id="calImport" type="submit">Calcular Importación</button>
+        </div>
+    </section>
+</section> -->
+    <!-- About Section code -->
+    <section class="main-about" id="main-about">
+        <section class="about-description">
+            <h2 class="title-about"> Seguimiento de Logística internacional al fin del Mundo</h2>
+            <div class="text-description">
+                <p>
+                    <strong> Austro Logística</strong> es una web app de seguimiento logístico de importación para
+                    empresas ubicadas en Tierra del Fuego, Ushuaia Argentina. Comprendemos la importacia que tienen
+                    lograr un
+                    proceso de importación en el tiempo más óptimo, teniendo en consideración la ubicación geográfica.
+                </p>
+                <p>En este sentido <strong>Austro Logística</strong> ofrece una plataforma que ayude a las pequeñas y
+                    medianas empresas en el área de Comercio Exterior, a realizar un seguimiento detallado de cada
+                    proceso de importación.</p>
+                <p>Herramientas que permiten realizar un <strong>control documental de cada importación</strong>,
+                    <strong>seguimiento activo del tránsito </strong>
+                    de cada mercadería, <strong>gestión ante las diferentes marítimas, logística local y gestión de
+                        importación multimodal.</strong>
+                </p>
+                <h3 class="about-team-description">Nuestro Equipo</h3>
+                <p>Somos un equipo con experiencia en Logística Internacional de Importación a Tierra del Fuego y
+                    comprendemos junto a nuestros clientes las particularidades de cada proceso de importación para
+                    evitar demoras y responder de manera pro-activa ante cualquier
+                    percanse, siempre ajustandonos a los requirimientos cambiantes del mercado local ante las
+                    importaciones.</p>
+            </div>
+        </section>
+        <div class="about-img">
+            <img src="./assets/img/port.jpg" alt="Imagen de Puerto" class="image">
+            <!-- <div class="overlay">
+                <!-- <div class="text">Seguimiento Logístico de Importación</div> -->
+            </div> 
+        </div>
+    </section>
+    <!-- Services Section code -->
+    <section class="services-main" id="services">
+        <h2 class="title-service">Servicios que se adaptan a tus necesidades</h2>
+        <section class="services-container">
+            <div class="card" id="service-card">
+                <h2 class="card-title-front">Documentación</h2>
+                <i class="fa-solid fa-plus"></i>
+                <img src="./assets/img/mountain.jpg" class="card-img" alt="Imagen de contenedores">
+                <div class="card-body">
+                    <h3 class="card-title">Documentación</h3>
+                    <p class="card-info"> Control en la emisión de la documentación comercial para la importación.
+                        Revisión detallada de la documentación comercial y de transporte para tus cargas de importación.
+                        Analizamos cada detalle para evitar inconvenientes y demoras con aduana.</p>
+
+                    <a href="./signIn.html"><button class="card-btn">Ingresar</button> </a>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title-front">Seguimiento Logístico</h2>
+                <i class="fa-solid fa-plus"></i>
+                <img src="./assets/img/ocean.jpg" class="card-img" alt="">
+                <div class="card-body">
+                    <h3 class="card-title">Seguimiento Logístico</h3>
+                    <p class="card-info">A través del portal de seguimiento, podrás realizar un seguimiento activo de
+                        todos los transitos. De esta menera podrás tomar las acciones necesarias para
+                        para evitar cualquier demora que surga.</p>
+
+                    <a href="./signIn.html"><button class="card-btn">Ingresar</button> </a>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-title-front">Operativa de Importación</h2>
+                <i class="fa-solid fa-plus"></i>
+                <img src="./assets/img/port.jpg" class="card-img" alt="">
+                <div class="card-body">
+                    <h3 class="card-title">Operativa de Importación</h3>
+                    <p class="card-info">Austro te apoya con todo el proceso operativo permitiendote automatizar el el
+                        paso a paso de cada importación según la línea marítima.</p>
+                    <a href="./signIn.html"><button class="card-btn">Ingresar</button> </a>
+                </div>
+            </div>
+        </section>
+    </section>
+    <!-- Sign In Section Code -->
+    <section class="signIn-main" id="signInForm">
+        <h2 class="title-signIn">Registrate</h2>
+        <div class="box-form"> 
+            <div id="error"></div>
+        <form class="sign-in-form" novalidate>
+            <div class="input-1">
+                <label for="validationCustom01" class="form-label">Nombre y Apellido</label>
+                <input type="text" class="form-control" id="validationName" placeholder="Ingrese su Nombre" required>
+                <div id="invalid-feedback-input-1">
+                </div>
+            </div>
+            <div class="input-2">
+                <label for="validationEmail" class="form-label">Correo </label>
+                <div class="input-group has-validation">
+                    <input type="text" class="form-control" id="validationEmail"
+                        aria-describedby="inputGroupPrepend" required placeholder="Ingrese un correo electrónico"> 
+                        <div id="invalid-feedback-input-2">
+                        </div>
+                </div>
+            </div>
+            <div class="input-3">
+                <label for="validationPassword" class="form-label">Contraseña</label>
+                <input type="password" class="form-control" id="validationPassword" required placeholder="* * * * * *">
+                <div id="invalid-feedback-input-3">
+                    <div id="message">
+                        <h3>Incluya los siguientes caracteres:</h3>
+                        <p id="letter" class="invalid">Letras en <b>Minúsculas</b></p>
+                        <p id="capital" class="invalid">Letras en <b>Mayúsculas</b></p>
+                        <p id="number" class="invalid"><b>Números</b></p>
+                        <p id="length" class="invalid">Al menos <b>8 caracteres</b></p>
+                      </div>
+                </div>
+                
+                
+            </div>
+            <div class="input-4">
+                <label for="validationPassword2" class="form-label">Confirme su contraseña</label>
+                <input type="password" class="form-control" id="validationPassword2" required placeholder="* * * * * *">
+                <div id="invalid-feedback-input-4">
+                </div>
+            </div>
+            <div class="signIn-button">
+                <button type="submit" class="btn btn-primary w-100" id="create-user" type="submit">Registrarse</button>
+            </div>
+            
+            <div class="register-apps">
+                <hr>
+            <p>Registrar con Google</p>
+            <i class="fa-brands fa-google"></i>
+        </div>
+        </form>
+        
+    </div>
+
+    </section>
+    <!-- JS Section Import -->
+ 
+    <!-- Footer Code -->
+    <footer>
+        <div class="footer-icons">
+            <div>
+                <a href="./index.html">
+                    <img src="./assets/img/Austro-ImgType-white.png" class="footer-imgtype"
+                        alt="Austro Logistica Imagotipo">
+                </a>
+            </div>
+            <div class="icons-links">
+                <a href="https://www.linkedin.com/in/loveragabriel/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/loveragabriel/austrologistica" target="_blank"> <i class="fa-brands fa-github"></i></a>
+                <a href="http://127.0.0.1:5500/pages/logIn.html" target="_blank"><i class="fa-solid fa-brands fa-right-to-bracket"></i></a>
+            </div>
+        </div>
+        <div class="siteMap-links" id="siteMap">
+            <a href="./pages/about.html">Austro</a>
+            <a href="./pages/contact.html">Contacto</a>
+            <a href="./pages/logIn.html">Ingreso</a>
+            <a href="./pages/services.html">Servicios</a>
+            <a href="./pages/signIn.html">Registro</a>
+            <a href="./pages/terms.html">Términos</a>
+        </div>
+        <div class="copyRight">
+            <p>
+                2022 Gabriel Lovera
+            </p>
+        </div>
+
+    </footer>
+    <i class="fa-solid  " id="uPTo"></i>
+    <script src="./js/app.js"></script>
+    <script src="./js/sign.js"></script>
+</body>
+</html>

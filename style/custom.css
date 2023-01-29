@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200&family=IBM+Plex+Serif:ital,wght@0,200;1,100&family=Lora&family=Open+Sans&display=swap');
+
+* {
+    font-family: Blinker;
+    font-weight: 700;
+}   
+:root {
+    --blue: #002E94;
+    --title: #090f29;
+    --white-title: #ffffff;
+    --info-color: #252429;
+    --links: #0F1A32;
+    --orange: #E79336;
+    --surfieGreen: #106D86;
+    --bleachedCedar: #221623;
+    --comoris: #64728b;
+    --blue-hover: #aab0e0;
+    --footer-bck: #072146;
+    --wrong-color: #FF0000; 
+    --valid-color: #23DC3D;
+    --input-focus-color: #212427; 
+}
+nav{
+    background-color: var(--footer-bck);
+    color: white;
+}
+.container-fluid{
+    color: white;
+}
+.img-nav{
+    margin: 0;
+    max-width: 10vw;
+    min-width: 100px;
+}
+
+.nav-link{ 
+    color: white;
+}
+
+.bck_home{
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    object-fit: cover;
+    opacity: 0.9;
+    filter: brightness(0.7);
+}
+
+
+.card-home {
+    color: white;
+    position: absolute;
+    padding: 30px;
+    font-size: 2em;
+    top: 280px;
+    right: inherit;
+    min-width: 270px;
+    font-weight: 900;
+    animation: myfirst 2s 1;
+    letter-spacing: 1.3px;
+    
+}
+
+.main-about{
+    padding: 0.5em;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: end;
+    opacity: 0.9;
+    object-fit: cover;
+}
+
+.about-img{
+    display: flex;
+    max-width: 450px;
+    margin: auto;
+    border-radius: 2px;
+    box-shadow: 1px 2px 30px rgb(10, 10, 10);
+}
+
+.services-main{
+    position: relative;
+}
+button .navbar-toggler{
+    color: white;
+    color: white;
+}
+ span{
+    color: white;
+    border-color: white;
+}
+
+.container-fluid .navbar-toggler{
+    color: white;
+}
+
+@media (max-width:950px){
+    .about-img {
+        display: none;
+    }
+    .main-about {
+        display: grid;
+        grid-template-columns: 1fr;
+        z-index: -1;
+    }
+
+   
+}
+
+
+footer{
+    background-color: #002E94;
+}
+
+footer {
+    z-index: 1;
+    background-color: var(--footer-bck);
+    padding: 1em;
+    position: relative;
+    bottom: 0px;
+}
+
+.footer-icons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footer-imgtype {
+    max-width: 300px;
+    text-align: center;
+    padding: 1.5em;
+}
+
+
+.icons-links a {
+  text-decoration: none;
+    color: white;
+    font-size: 0.8em;
+    padding: 1em;
+}
+
+.footer-imgtype div a {
+    padding: 1em;
+}
+
+.fa-brands {
+    color: white;
+    font-size: 2em;
+}
+
+.fa-brands:hover {
+    color: var(--orange);
+    transform: scale(1.3);
+}
+
+.siteMap-links a {
+    background-color: var(--footer-bck);
+
+}
+
+#siteMap a {
+    color: white;
+    padding-left: 1em;
+    text-decoration: none;
+    font-weight: 500;
+
+}
+
+.copyRight {
+    margin-top: 1em;
+    background-color: var(--footer-bck);
+    color: var(--surfieGreen);
+    text-align: center;
+}
+
+.carousel-caption  h5{
+    font-weight: 800;
+    color: white;
+    letter-spacing: 1.4px;
+    font-size: 2em;
+}
+
+.carousel-caption p{
+    letter-spacing: 1.4px;
+}
+
+.carousel-item img{
+    filter: brightness(0.7);
+
+}
+
+
+
+@media (max-width: 500px){
+    .footer-imgtype{
+    display: flex;  
+    max-width: 95vw; 
+    padding: 0.3em;
+    margin: 0;
+    left: 0;
+ }
+
+
+.card-home{
+    /* display: none; */
+padding: 5px;    max-width: 10px;
+    font-size: 150%;
+}
+
+.carousel-caption{
+    color: white;
+    font-size: 1em;
+}
+
+.carousel-item img{
+    filter: brightness(0.5);
+}
+
+.icons-links{
+    display: flex;
+    flex-direction: row;
+}
+}
+
+
+/* FORM */
+form{
+    visibility: hidden;
+    position: absolute;
+    top: 10vh;
+    left: 40vw;
+    z-index: 1;
+    background-color: white;
+    padding: 1em;
+}
+
+.valid {
+    color: var(--valid-color);
+  }
+  
+  .valid:before {
+    position: relative;
+    padding: 2px;
+    content: "✅";
+  }
+  
+  /* Add a red text color and an "x" icon when the requirements are wrong */
+  .invalid {
+    color: var(--wrong-color);
+  }
+  
+  .invalid:before {
+    position: relative;
+    padding: 2px;
+    content: "⚠️";
+  }
