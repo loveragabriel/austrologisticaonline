@@ -227,14 +227,27 @@ padding: 5px;    max-width: 10px;
 
 
 /* FORM */
-form{
-    visibility: hidden;
+
+
+#form{
+    display: none;
     position: absolute;
-    top: 10vh;
-    left: 40vw;
+    flex-direction: column;
+    top: 30vh;
+    left: 30vw;
+    right: 30vw;
     z-index: 1;
     background-color: white;
     padding: 1em;
+    border-radius: 5px;
+    box-shadow: 1px 1px 20px black;
+    margin-top: 10px;
+}
+
+.fa-x{
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
 }
 
 .valid {
@@ -257,3 +270,18 @@ form{
     padding: 2px;
     content: "⚠️";
   }
+
+  
+@media (max-width: 650px) {
+    
+    #form{
+        display: none;
+        position: absolute;
+        flex-direction: column;
+        z-index: 1;
+        background-color: white;
+        left: 10px;
+        right: 10px;
+    }
+        
+    }

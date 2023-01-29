@@ -1,13 +1,15 @@
 let headerS = document.querySelector('.solid-bckg');
 const myModal = document.getElementById('myModal')
 const myInput = document.getElementById('myInput');
-let formClose = document.getElementById("closeForm");
-let openForm = document.getElementById('form_signIn');
+let formClose = document.querySelector('.fa-x')
+let openForm = document.getElementById('open-form');
+let getForm = document.getElementById('form');
 
 openForm.addEventListener('click',()=>{
-  form.style.visibility = 'visible'
+  getForm.style.display = 'flex'
+  window.style.background = 'black';
 })
 
 formClose.addEventListener('click', ()=>{
-  formClose.style.display = 'none'
+  getForm.style.display = 'none'
 })
