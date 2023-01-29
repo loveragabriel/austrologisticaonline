@@ -7,7 +7,6 @@ let getForm = document.getElementById('form');
 
 openForm.addEventListener('click',()=>{
   getForm.style.display = 'flex'
-  window.style.background = 'black';
 })
 
 formClose.addEventListener('click', ()=>{
