@@ -12,3 +12,4 @@ openForm.addEventListener('click',()=>{
 formClose.addEventListener('click', ()=>{
   getForm.style.display = 'none'
 })
+
