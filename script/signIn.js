@@ -84,7 +84,7 @@ const createNewUse = (e) => {
   //Use de constructor
   class User {
     constructor(validation_name, validation_email, validation_password, confirm_password) {
-      this.id = userDataBase.length + 1;
+      this.id = validation_email;
       this.validation_name = validation_name
       this.validation_email = validation_email;
       this.validation_password = validation_password;
@@ -95,8 +95,8 @@ const createNewUse = (e) => {
   const saveNewUser =(validation_name,validation_email,validation_password,confirm_password)=>{
     let nuevoUsuario = new User(validation_name,validation_email, validation_password, confirm_password)
     userDataBase.push(nuevoUsuario);
-    const dataUser =  localStorage.setItem(`${userDataBase.length + 1}`, JSON.stringify(nuevoUsuario));
-    const getUser = localStorage.getItem(`${userDataBase.length + 1}`);
+    const dataUser =  localStorage.setItem(`${validation_email}`, JSON.stringify(nuevoUsuario));
+    const getUser = localStorage.getItem(`${validation_email}`);
     console.log(JSON.parse(getUser));
     location.href = '/pages/dash.html';
   }

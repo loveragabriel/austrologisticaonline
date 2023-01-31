@@ -291,7 +291,10 @@ padding: 5px;    max-width: 10px;
         left: 10px;
         right: 10px;
     }
-        
+    
+    .form-id{
+        min-width: 80vw;
+    }
     }
 
 /* Dash */
@@ -310,20 +313,33 @@ padding: 5px;    max-width: 10px;
 
 
 /* Log In  */
+#body-color-log{
+background-color: var(--footer-bck);
+}
 .form-id{
     color: black;
-    margin: 2em;
+    margin: 3em auto;
     background-color: white;
     box-shadow: 1px 1px 5px black;
     border-radius: 5px;
-    max-width: 50vw;
+    max-width: 35vw;
+    padding:  3em 1em;
 }
 
 .fax-log{
+    padding: 2em;
     top:10px;
     font-size: .7em;
+    color: white;
 }
 
 .cont-log{
-    background-color: #072146;
+    padding: 2em;
+}
+
+.icon-black-container{
+display: flex;
+justify-content: center;
+padding-bottom: 2em;
+
 }

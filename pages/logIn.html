@@ -18,16 +18,15 @@
     <!-- Tab Title -->
     <title>Ingreso</title>
 </head>
-<body>
+<body id="body-color-log">
     <main class="container-fliud cont-log">
-    <i class="fa-solid fa-x fax-log" > Volver</i>
+    <i class="fa-solid fa-x fax-log" id="power-off" > Volver</i>
        <form id="logIn" class="form-id">
-    <div class="mb-3">
-      <label for="name" class="form-label">Nombre</label>
-      <input type="text" class="form-control" id="name" aria-describedby="nameHelp">
-      <div id="invalid-feedback-input-1">
+        <div class="icon-black-container">
+        
+              <img src="../media/a-blk-icon.svg" class="icon-black" alt="Austro Logistica Imagotipo" width="20%">
+        
       </div>
-    </div>
     <div class="mb-3">
         <label for="email" class="form-label">Correo</label>
         <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
@@ -37,23 +36,12 @@
       <label for="password" class="form-label">Contraseña</label>
       <input type="password" class="form-control" id="password">
       <div id="invalid-feedback-input-3">
-        <div id="message">
-            <h5>Incluya los siguientes caracteres:</h5>
-            <p id="letter" class="invalid">Letras en <b>Minúsculas</b></p>
-            <p id="capital" class="invalid">Letras en <b>Mayúsculas</b></p>
-            <p id="number" class="invalid"><b>Números</b></p>
-            <p id="length" class="invalid">Al menos <b>8 caracteres</b></p>
-          </div>
     </div>   
     </div>
-    <div class="mb-3">
-        <label for="password_conf" class="form-label">Repita su contraseña</label>
-        <input type="password" class="form-control" id="password_conf">
-      </div>
-      <div id="invalid-feedback-input-4">
-      </div>
-    <button type="submit" id='create-user' class="btn btn-primary">Enviar</button>
+
+    <button type="submit" id='check-User' class="btn btn-primary">Enviar</button>
   </form>
 </main>
+<script src="../script/logIn.js"></script>
 </body>
 </html>
