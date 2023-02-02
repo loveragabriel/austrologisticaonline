@@ -17,69 +17,62 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top position-relative">
-        <div class="container">
+      <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            <img src="../media/austro-nav.svg" alt="Bootstrap" width="30" height="24">
+            <img class="img-nav" src="../media/austro-nav.svg">
           </a>
-          <p id="user-dash"></p>
-          <i class="fa-solid fa-power-off" id="power-off"> Cerrar</i>
-          
-        </nav>
+          <a class="navbar-brand" href="#">
+            <i class="fa-solid fa-power-off"></i>    
+          </a>
+        </div>
+      </nav>
     </header>
-    <main>
-        <div class="container-fluid row g-0">
-            <ul class="nav flex-column col-3 ">
-                <li class="nav-item">
-                  <a class="nav-link active" aria-current="page" href="#">Ordenes</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Transitos</a>
-                </li>
-              </ul>
-              <div class="container table-container col">
-                <table class="">
-                    <ul class="nav col ">
-                        <li class="nav-item">
-                          <a class="nav-link active" aria-current="page" href="#">Proforma</a>
-                        </li>
-                        <li class="nav-item">
-                          <a class="nav-link" href="#">Artículo</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">KG Net</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">FOB Price</a>
-                          </li>
-                      </ul>
-                    <tr class="bg-primary">
-                      <th>Proforma</th>
-                      <th>Artículo</th>
-                      <th>KG Net</th>
-                      <th>FOB Price</th>
-                      <th>Unit</th>
-                      <th>Unit</th>
-                      <th>Unit</th>
-                      <th>Unit</th>
-                    </tr>
-                    <tr>
-                      <td>Row 1, Column 1</td>
-                      <td>Row 1, Column 2</td>
-                      <td>Row 1, Column 3</td>
-                    </tr>
-                    <tr>
-                      <td>Row 2, Column 1</td>
-                      <td>Row 2, Column 2</td>
-                      <td>Row 2, Column 3</td>
-                    </tr>
-                    <tr>
-                        <td>Row 2, Column 1</td>
-                        <td>Row 2, Column 2</td>
-                        <td>Row 2, Column 3</td>
-                      </tr>
-              </div>
-          </div>
+    <main class="home-page">
+        <h2 class="title-home">Calculemos una imporación</h2>
+        <form>
+          <h3>Crear una nueva order</h3>
+          <label>Proveedor:
+            <input type="text" id="shipper">
+          </label>
+          <label>Numero de Orden:
+            <input type="number" id="order">
+          </label>
+          <label>Valor de la Mercadería:
+            <input type="number" id="fob">
+          </label>
+          <label>Valor del flete:
+            <input type="number" id="freight">
+          </label>
+          <label>Valor del seguro*:
+            <input type="number" id="insurance">
+          </label>
+          <label>Kilogramos Netos:
+            <input type="number" id="netkg">
+          </label>
+          <button type="submit" id="new-order">Crear</button>
+        </form>
+        <h3>Lista de Ordenes</h3>
+        <ul id="orders-created">
+          
+        </ul>
+        <!-- <form>
+          <label>Proveedor
+            <input type="text">
+          </label>
+          <label>Número de orden
+            <input type="text">
+          </label>
+          <label>Valor de la Mercadería
+            <input type="number">
+          </label>
+          <label>Valor del Flete
+            <input type="number">
+          </label>
+          <label>Valor de Seguro
+            <input type="number">
+          </label>
+        </form> -->
     </main>
     <script src="../script/home.js"></script>
     <script src="/script/logIn.js"></script>

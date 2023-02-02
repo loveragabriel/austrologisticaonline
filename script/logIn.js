@@ -9,8 +9,6 @@ let check_password = document.getElementById('password');
 
 let password_input =check_password.value;
 
-
-
 logIn_off.addEventListener('click', ()=>{
     location.href = '../index.html';
 })
@@ -23,17 +21,24 @@ logInUser.addEventListener('click',(e)=>{
     //Use the email value to call my storage 
     let getUser = localStorage.getItem(email);
     //Parse my object and get the email, password and name stored 
-    let storedUser = (JSON.parse(getUser).validation_email);
-    let storedPassword = (JSON.parse(getUser).validation_password); 
-    let name = (JSON.parse(getUser).validation_name); 
+    try {
+        let storedUser = (JSON.parse(getUser).validation_email);
+        let storedPassword = (JSON.parse(getUser).validation_password); 
+        let name = (JSON.parse(getUser).validation_name); 
+        if (email === storedUser && password === storedPassword){
+            alert(`Bienvenido ${name}`)
+            location.href = '/pages/dash.html';
+        }       }
+      catch(err) {
+        alert('Verifica las credenciales ingresadas'); 
+      }
+    
+    
     //check the input and the stored value  
-    if(email === storedUser && password === storedPassword){
-        alert(`Bienvenido ${name}`)
-        location.href = '/pages/dash.html';
-    } else if (storedUser || storedPassword == null || ''){
-        alert('Debe registrarse');
-    } else alert('⚠️Verifique sus credenciales!');
+
+   
 
 
 
 })
+

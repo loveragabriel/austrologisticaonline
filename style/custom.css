@@ -6,6 +6,7 @@
 }   
 :root {
     --blue: #002E94;
+    --navBar: #0818A8;
     --title: #090f29;
     --white-title: #ffffff;
     --info-color: #252429;
@@ -21,7 +22,7 @@
     --input-focus-color: #212427; 
 }
 nav{
-    background-color: var(--footer-bck);
+    background-color:var(--navBar)	;
     color: white;
 }
 .container-fluid{
@@ -86,17 +87,19 @@ nav{
 .services-main{
     position: relative;
 }
-button .navbar-toggler{
-    color: white;
-    color: white;
+button .navbar-toggler {  
+    color: white !important;; 
+
 }
- span{
-    color: white;
-    border-color: white;
+.navbar-toggler-icon span{ 
+    background-image: white !important; 
+    box-shadow: 1px 1px 1px white;
 }
+
 
 .container-fluid .navbar-toggler{
     color: white;
+    background-image: white !important; 
 }
 
 @media (max-width:950px){
@@ -311,6 +314,10 @@ padding: 5px;    max-width: 10px;
     width: 100vw;
 }
 
+.fa-power-off{
+    cursor: pointer;
+}
+
 
 /* Log In  */
 #body-color-log{
@@ -339,7 +346,18 @@ background-color: var(--footer-bck);
 
 .icon-black-container{
 display: flex;
-justify-content: center;
+flex-direction: column;
+align-items: center;
 padding-bottom: 2em;
 
+}
+
+
+/* Home */
+.home-page{
+    margin-top: 5em;
+}
+
+.title-home{
+    text-align:center;
 }
