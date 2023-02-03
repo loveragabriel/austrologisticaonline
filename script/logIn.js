@@ -7,7 +7,6 @@ let check_password = document.getElementById('password');
 
 
 
-let password_input =check_password.value;
 
 logIn_off.addEventListener('click', ()=>{
     location.href = '../index.html';

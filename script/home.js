@@ -9,6 +9,9 @@ let get_insurance = document.getElementById('insurance')
 let get_netkg = document.getElementById('netkg');
 let create_order = document.getElementById('new-order');
 let display_orders = document.getElementById('orders-created');
+let set_order_msj = document.querySelector('#orders-msj');
+let inner_col = document.getElementById('new-col');
+let delete_order = document.getElementById('delete-order');
 
  
 
@@ -39,7 +42,6 @@ class Order {
 const createNewOrder = (e) => {
     e.preventDefault() 
 
-   
   //Use de constructor
   let newOrder = new Order(get_shipper.value, 
     get_order.value,
@@ -47,20 +49,44 @@ const createNewOrder = (e) => {
     get_freight.value,
     get_insurance.value,
     get_netkg.value,);
-
   //Uso de Método push 
-  ordersArray.push(newOrder);
-  newOrder.getUnitValue();
-console.log(ordersArray);
-// creo la etiqueta que voy a incluir en el html
-// utilizo innerHTML para definir que voy a incluir en la tag
-// selecciono la constante que me llama el id donde voy a incluir la nueva etiqueta y uso append a prepend 
-const liTag = document.createElement('li')
-liTag.innerHTML = `${get_shipper.value} +
-                    ${get_fob.value};`
-display_orders.appendChild(liTag);
+  if(get_shipper.value == '' ||
+    get_order.value == '',
+    get_fob.value == '',
+    get_freight.value == '',
+    get_insurance.value == '',
+    get_netkg.value == ''){
+      alert('Debe completar todos los datos')
+
+    } else { newOrder.getUnitValue();
+      ordersArray.push(newOrder);
+      console.log(ordersArray);
+    // creo la etiqueta que voy a incluir en el html
+    // utilizo innerHTML para definir que voy a incluir en la tag
+    // selecciono la constante que me llama el id donde voy a incluir la nueva etiqueta y uso append a prepend 
+    document.getElementById('orders-msj').style.display = 'none'
+    const newRow = document.createElement('tr')
+    newRow.innerHTML = `<td>${get_order.value}</td>
+                        <td>${get_shipper.value}</td>
+                        <td>${get_fob.value}</td>
+                        <td>${get_freight.value}</td>
+                        <td>${get_insurance.value}</td>
+                        <td>${get_netkg.value}</td>
+                        <td><button id="delete-order" value='${get_order.value}' class='btn btn-danger'>x</button></td>
+    `
+    inner_col.appendChild(newRow);
+    const dataOrders =  localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
+  }
+ 
 }
 
 
 
+function eliminarOrden(){
+  alert('Hello') 
+}
+
 create_order.onclick=createNewOrder; 
+document.getElementById('delete-order').onclick=eliminarOrden; 
+
+
