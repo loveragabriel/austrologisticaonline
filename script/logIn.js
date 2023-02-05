@@ -6,12 +6,13 @@ let check_password = document.getElementById('password');
 
 
 
-
-
 logIn_off.addEventListener('click', ()=>{
     location.href = '../index.html';
 })
 
+//Función para validar usuario
+//Uso de getItem para tomar registro de usuario y verificar si está guardado en localStorage. 
+//Uso de parse
 logInUser.addEventListener('click',(e)=>{
     e.preventDefault()
     //cath the input values 
@@ -25,13 +26,12 @@ logInUser.addEventListener('click',(e)=>{
         let storedPassword = (JSON.parse(getUser).validation_password); 
         let name = (JSON.parse(getUser).validation_name); 
         if (email === storedUser && password === storedPassword){
-            alert(`Bienvenido ${name}`)
-            location.href = './pages/home.html';
+            alert(`Bienvenido ${name}!`)
+            location.href = './home.html';
         }       }
       catch(err) {
         alert('Verifica las credenciales ingresadas'); 
       }
-    
     
     //check the input and the stored value  
 

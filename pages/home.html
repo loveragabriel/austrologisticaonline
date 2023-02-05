@@ -22,7 +22,7 @@
   <header>
     <nav class="navbar navbar-expand-lg fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="../index.html">
           <img class="img-nav" src="../media/austro-nav.svg">
         </a>
         <a class="navbar-brand" href="#">
@@ -33,60 +33,63 @@
   </header>
   <main class="home-page">
     <!-- <h2 class="title-home">Calculemos una imporación</h2> -->
-      <form class="text-center">
-        <h3 class="fw-bold">Crear una nueva order</h3>
-        <div class="form-group">
-          <label>Proveedor:
-            <input type="text" id="shipper">
-          </label>
-        </div>
-        <div class="form-group mt-2">
-          <label>Numero de Orden:
-            <input type="number" id="order">
-          </label>
-        </div>
-        <div class="form-group mt-2">
-          <label>Valor de la Mercadería:
-            <input type="number" id="fob">
-          </label>
-        </div>
-        <div class="form-group mt-2">
-          <label>Valor del Flete:<br>
-            <input type="number" id="freight">
-          </label>
-        </div>
-        <div class="form-group mt-2">
-          <label>Valor del seguro*:
-            <input type="number" id="insurance">
-          </label>
-        </div>
-        <div class="form-group mt-2">
-          <label>Kilogramos Netos:
-            <input type="number" id="netkg">
-          </label>
-        </div>
-        <button class="btn btn-primary m-3" type="submit" id="new-order">Crear</button>
-      </form>
-      <h3>Gestión de Ordenes: </h3>
-      <table class="table" id="order-table">
-        <thead class="thead-light">
-          <tr>
-            <th>#Orden</th>
-            <th>Proveedor</th>
-            <th>Costo</th>
-            <th>Flete</th>
-            <th>Seguro</th> 
-            <th>KG Net</th>
-            <th>Precio Unitario</th>
-          </tr>
-        </thead>
-        <tbody id="new-col">
-          <tr id="orders-msj">
-            <td colspan="7" class="text-center">No hay ordenes para mostrar</td>
-          </tr>
-        </tbody>
-      </table>
-        </form>
+    <form class="">
+      <h3 class="fw-bold">Crear una nueva order</h3>
+      <div class="form-group mt-2 sm">
+        <label>Proveedor:
+          <input type="text" id="shipper">
+        </label>
+      </div>
+      <div class="form-group mt-2 sm">
+        <label>Numero de Orden:
+          <input type="number" id="order">
+        </label>
+      </div>
+      <div class="form-group mt-2 sm">
+        <label>Valor de la Mercadería:
+          <input type="number" id="fob">
+        </label>
+      </div>
+      <div class="form-group mt-2 sm">
+        <label>Valor del Flete:
+          <input type="number" id="freight">
+        </label>
+      </div>
+      <div class="form-group mt-2 sm">
+        <label>Valor del seguro*:
+          <input type="number" id="insurance">
+        </label>
+      </div>
+      <div class="form-group mt-2 sm">
+        <label>Kilogramos Netos:
+          <input type="number" id="netkg">
+        </label>
+      </div>
+      <button class="btn btn-primary m-3" type="submit" id="new-order">Crear</button>
+    </form>
+    <h3>Gestión de Ordenes: </h3>
+    <table class="table" id="order-table">
+      <thead class="thead-light">
+        <tr>
+          <th>#Orden</th>
+          <th>Proveedor</th>
+          <th>Costo</th>
+          <th>Flete</th>
+          <th>Seguro</th>
+          <th>KG Net</th>
+          <th>Precio Unitario</th>
+        </tr>
+      </thead>
+      <tbody id="new-col">
+        <tr id="orders-msj">
+          <td colspan="7" class="text-center">No hay ordenes para mostrar</td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="display-final-result">
+
+    </div>
+
   </main>
   <script defer src="../script/home.js"></script>
   <script src="/script/logIn.js"></script>
