@@ -75,8 +75,7 @@ const createNewUse = (e) => {
       const getUser = localStorage.getItem(`${validation_email}`);
       console.log(JSON.parse(getUser));
     }
-    saveNewUser(validation_name.value, validation_email.value, validation_password.value, validation_password_conf.value)
-
+    saveNewUser(validation_name.value, validation_email.value, validation_password.value, validation_password_conf.value);
     alert(` ¡Bienvenido ${validation_name.value}!😎`)
     location.href = '/pages/home.html';
 

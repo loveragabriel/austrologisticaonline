@@ -158,6 +158,7 @@ const createNewOrder = (e) => {
     //deleRow para eliminar una orden creada
     //calculrImpo para realizar el calculo de importación con los datos guardados en localStorage de la orden. 
     //Uso de la función funcionParaAduana para hacer los calculos e imprimir resultado en el DOM. 
+    //Uso de deconstructor para objetos
     getTable.addEventListener('click', (e) => {
 
       let btn = e.target
@@ -175,6 +176,7 @@ const createNewOrder = (e) => {
         const getOrder = localStorage.getItem(`${imporId}`);
         let retriveOrder = JSON.parse(getOrder);
 
+        //Uso de deconstructor
         let { orderNumber, shipper, cost, freight, insurance, netKg, unitValue } = retriveOrder
 
         let itsRight = imporId === orderNumber;
