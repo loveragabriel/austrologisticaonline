@@ -26,7 +26,7 @@ logInUser.addEventListener('click',(e)=>{
         let name = (JSON.parse(getUser).validation_name); 
         if (email === storedUser && password === storedPassword){
             alert(`Bienvenido ${name}`)
-            location.href = '/pages/dash.html';
+            location.href = '/pages/home.html';
         }       }
       catch(err) {
         alert('Verifica las credenciales ingresadas'); 
@@ -34,10 +34,6 @@ logInUser.addEventListener('click',(e)=>{
     
     
     //check the input and the stored value  
-
-   
-
-
 
 })
 

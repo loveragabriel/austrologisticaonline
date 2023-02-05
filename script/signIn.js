@@ -16,6 +16,7 @@ let length = document.getElementById("length");
 let userDataBase = [];
 
 const createNewUse = (e) => {
+
     e.preventDefault();
     let numberValidation = validation_name.value.match(/[0-9]/);
     let characterValidation = validation_name.value.match(/[~`!@#$%\^&*()+=\-\[\]\\';,/{}|\\":<>\?]/);
@@ -39,49 +40,17 @@ const createNewUse = (e) => {
     let upperCaseLetters = validation_password.value.match(/[A-Z]/g); //ok
     let lengthInput = validation_password.value.length >= 8;
   
-   if(lowerCaseLetters){
-    letter.classList.remove("invalid");
-    letter.classList.add("valid");
-   } else {
-    letter.classList.remove("valid");
-    letter.classList.add("invalid");
-   }
-  
-    if (upperCaseLetters) {
-      capital.classList.remove("invalid");
-      capital.classList.add("valid");
-    } else {
-        capital.classList.remove("valid");
-      capital.classList.add("invalid");
-    }
-  
-    if (numbers) {
-      number.classList.remove("invalid");
-      number.classList.add("valid");
-    } else {
-          number.classList.remove("valid");
-      number.classList.add("invalid");
-    }
-  
-    if (lengthInput) {
-      length.classList.remove("invalid");
-      length.classList.add("valid");
-    } else {
-      length.classList.remove("valid");
-      length.classList.add("invalid");
-    }
+    (lowerCaseLetters ? (letter.classList.remove("invalid"), letter.classList.add("valid") ): (letter.classList.remove("valid"), letter.classList.add("invalid")));
+    (upperCaseLetters ? (capital.classList.remove("invalid"), capital.classList.add("valid")) : capital.classList.remove("valid"),capital.classList.add("invalid"));
+    (numbers ? (number.classList.remove("invalid"), number.classList.add("valid")) : (number.classList.remove("valid"),number.classList.add("invalid")));
+    (lengthInput ? (length.classList.remove("invalid"), length.classList.add("valid")) : (length.classList.remove("valid"), length.classList.add("invalid")));
+
      if(!upperCaseLetters || !numbers || !lengthInput){
       error_pass_confirmation.innerHTML = `<p>Asegurese de cumplir los requisitos de seguridad</p>`
       return
      }
     if (validation_password.value === validation_password_conf.value) {
-    alert(`${validation_name.value} ¡Bienvenido! 😎`)
-  
-    } 
-  
-    saveNewUser(validation_name.value,    validation_email.value,    validation_password.value, validation_password_conf.value)
-  }
-  //Use de constructor
+      
   class User {
     constructor(validation_name, validation_email, validation_password, confirm_password) {
       this.id = validation_email;
@@ -91,15 +60,25 @@ const createNewUse = (e) => {
       this.confirm_password = confirm_password;
     }
   } 
+      const saveNewUser =(validation_name,validation_email,validation_password,confirm_password)=>{
+        let nuevoUsuario = new User(validation_name,validation_email, validation_password, confirm_password)
+        userDataBase.push(nuevoUsuario);
+        const dataUser =  localStorage.setItem(`${validation_email}`, JSON.stringify(nuevoUsuario));
+        const getUser = localStorage.getItem(`${validation_email}`);
+        console.log(JSON.parse(getUser));
+      }
+      saveNewUser(validation_name.value,    validation_email.value,    validation_password.value, validation_password_conf.value)
+
+    alert(`${validation_name.value} ¡Bienvenido! 😎`)
+    location.href = '/pages/home.html';
+
+    } 
   
-  const saveNewUser =(validation_name,validation_email,validation_password,confirm_password)=>{
-    let nuevoUsuario = new User(validation_name,validation_email, validation_password, confirm_password)
-    userDataBase.push(nuevoUsuario);
-    const dataUser =  localStorage.setItem(`${validation_email}`, JSON.stringify(nuevoUsuario));
-    const getUser = localStorage.getItem(`${validation_email}`);
-    console.log(JSON.parse(getUser));
-    location.href = '/pages/dash.html';
   }
+  //Use de constructor
+ 
+  
+ 
   
   
   

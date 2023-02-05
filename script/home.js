@@ -13,8 +13,49 @@ let set_order_msj = document.querySelector('#orders-msj');
 let inner_col = document.getElementById('new-col');
 let delete_order = document.getElementById('delete-order');
 
- 
 
+//Funcion suma de costos - incorporación de condicionales
+const valorIncoterm = (valorCosto, valorSeguro, valorFlete) => {
+  if (!valorCosto || valorCosto == 0 || valorCosto == '') {
+    alert('Debe Ingresar valor de su mercaderí, intente nuevamente.')
+  } else if (!valorFlete || valorFlete == 0 || valorFlete == '') {
+    alert('Debe ingresar el valor del flete');
+  }
+  else if (valorCosto && !valorSeguro || valorSeguro == 0 || valorSeguro == '' && valorFlete) {
+    let valorAduana = valorCosto + (valorCosto * 0.01) + valorFlete;
+    alert('El valor del seguro será del 1% del costo de la mercadería ingresada');
+    let aduana = Number(prompt('Ingrese la aduana de destino \n 1. BUE \n 2. RGA \n 3. USH'));
+    funcionParaAduana(aduana, valorAduana);
+  } else if (valorCosto, valorSeguro, valorFlete) {
+    let valorAduana = valorCosto + valorSeguro + valorFlete;
+    let aduana = Number(prompt('Ingrese la aduana de destino \n 1. BUE \n 2. RGA \n 3. USH'));
+    funcionParaAduana(aduana, valorAduana);
+
+  }
+  else alert('Los valores son incorrectos')
+}
+
+
+// Funcion para calcular valor aduana Uso de Switch 
+const funcionParaAduana = (valorCase, valorCalculo) => {
+  switch (valorCase) {
+    case 1:
+      let totalB = valorCalculo + (valorCalculo * 0.21) + (valorCalculo * 0.35);
+      alert('Recuerde de deberá cumpliar con los impuestos correspondientes')
+      alert('El valor en Aduana BUE es ' + totalB)
+      break;
+    case 2:
+      let camion = Number(prompt('Ingrese el valor de camión'));
+      let totalR = valorCalculo + camion;
+      alert('El valor en Aduana RGA es ' + totalR)
+      break;
+    case 3:
+      alert('El valor en Aduana USH zona Economica especial es ' + valorCalculo)
+      break;
+    default:
+      alert('Debes ingresar una aduana correcta');
+  }
+}
 
 closeDash.addEventListener('click', ()=>{
     location.href = '../index.html';
@@ -81,29 +122,11 @@ const createNewOrder = (e) => {
                         </tr>
     `
 
-
-
     const dataOrders =  localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
     
-   
-
-
-
     getTable.addEventListener('click',(e)=>{
-        //  console.log(ordersArray)
-        //  let getId = document.getElementById(`impor-row${get_order.value}}`);
-        //  console.log(getId);
-        // alert(e.srcElement.id); 
-
-        {/* Con este obtengo el element actual
-      let btn = e.target
-      btn.closest('tr').remove();
-        con este obtengo el id del botton que seleccione
-        btn.closest('button').id;
-
-      */}
-
-      let btn = e.target
+     
+     let btn = e.target
  const deleteRow =(e)=>{
   btn.closest('tr').remove()
  }   
@@ -114,9 +137,64 @@ const createNewOrder = (e) => {
   let imporId = btn.value
 
    const getOrder = localStorage.getItem(`${imporId}`);
-     console.log(JSON.parse(getOrder));
-    // location.href = '/pages/dash.html';
+    let retriveOrder = JSON.parse(getOrder);
 
+     let {orderNumber,shipper, cost, freight, insurance, netKg,unitValue} = retriveOrder
+
+     let itsRight = imporId === orderNumber; 
+     if (itsRight) {
+
+      let costOrder = Number(cost);
+      let insuranceOrder = Number(insurance);
+      let freightOrder = Number(freight);
+
+      valorIncoterm(costOrder,insuranceOrder,freightOrder)
+      }
+{/*
+
+
+     const calcularImpo = () => {
+      //Llamado para seleccionar una objeto del array ordenes que servirá para calcular los gatos de importación de esa orden.  
+      //Uso de iteración para evaluar 3 veces las credenciales ingresadas.    
+    
+          //Creación de función que usa el método find para identificar una orden y poder calcular los gastos de importación. 
+          const encontrarFind = (order_ = prompt('Ingresa Numero de orden a Calcular').toUpperCase()) => ordersArray.find((item) => {
+            let itsRight = item.orderNumber === order_;
+            if (itsRight) {
+              alert(`Calcularemos la importación para la siguiente orden: 
+                            ${item.shipper}
+                            ${item.orderNumber}
+                            ${item.cost} 
+                            ${item.freight}
+                            ${item.insurance}`);
+    
+              let cost = Number(item.cost);
+              let insurance = Number(item.insurance);
+              let freight = Number(item.freight);
+              //Uso de función con datos llamados del objeto orden para calcular gastos de importación. 
+              valorIncoterm(cost, insurance, freight);
+            }
+          });
+    
+          encontrarFind();break
+        }
+        --intentos
+        //alert('Verifica las credenciales ingresadas.')
+    
+        if (intentos == 0) {
+          alert('No podrás calcular tu importación credenciales');
+          break
+        }
+      }
+    }
+    
+    
+    btn_calculo_impo.onclick = calcularImpo;
+
+
+
+///termina aquí
+ */}
 }
  
  
