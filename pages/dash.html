@@ -32,44 +32,43 @@
     </nav>
   </header>
   <main class="home-page">
-    <h2 class="title-home">Calculemos una imporación</h2>
-      <form>
-        <h3>Crear una nueva order</h3>
+    <!-- <h2 class="title-home">Calculemos una imporación</h2> -->
+      <form class="text-center">
+        <h3 class="fw-bold">Crear una nueva order</h3>
         <div class="form-group">
           <label>Proveedor:
             <input type="text" id="shipper">
           </label>
         </div>
-
-        <div class="form-group">
+        <div class="form-group mt-2">
           <label>Numero de Orden:
             <input type="number" id="order">
           </label>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-2">
           <label>Valor de la Mercadería:
             <input type="number" id="fob">
           </label>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-2">
           <label>Valor del flete:
             <input type="number" id="freight">
           </label>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-2">
           <label>Valor del seguro*:
             <input type="number" id="insurance">
           </label>
         </div>
-        <div class="form-group">
+        <div class="form-group mt-2">
           <label>Kilogramos Netos:
             <input type="number" id="netkg">
           </label>
         </div>
-        <button type="submit" id="new-order">Crear</button>
+        <button class="btn btn-primary m-3" type="submit" id="new-order">Crear</button>
       </form>
       <h3>Gestión de Ordenes: </h3>
-      <table class="table">
+      <table class="table" id="order-table">
         <thead class="thead-light">
           <tr>
             <th>#Orden</th>
