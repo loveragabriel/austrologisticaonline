@@ -13,7 +13,7 @@ let capital = document.getElementById("capital");
 let number = document.getElementById("number");
 let length = document.getElementById("length");
 
-//Se crea Array para guardar datos de usuario en localStorage
+//Se crea Array para guardar datos de usuario en sessionStorage
 let userDataBase = [];
 
 // Función para registrar un nuevo usuario. 
@@ -21,7 +21,7 @@ let userDataBase = [];
 //Display mensajes de validación con elementos HTML en el DOM
 //Uso de operador ternario 
 //Uso de constructor 
-//Uso de localStorage para guardar usuario
+//Uso de sessionStorage para guardar usuario
 //Uso de stringify para guardar el registro tipo JSON
 
 
@@ -71,8 +71,8 @@ const createNewUse = (e) => {
     const saveNewUser = (validation_name, validation_email, validation_password, confirm_password) => {
       let nuevoUsuario = new User(validation_name, validation_email, validation_password, confirm_password)
       userDataBase.push(nuevoUsuario);
-      const dataUser = localStorage.setItem(`${validation_email}`, JSON.stringify(nuevoUsuario));
-      const getUser = localStorage.getItem(`${validation_email}`);
+      const dataUser = sessionStorage.setItem(`${validation_email}`, JSON.stringify(nuevoUsuario));
+      const getUser = sessionStorage.getItem(`${validation_email}`);
       console.log(JSON.parse(getUser));
     }
     saveNewUser(validation_name.value, validation_email.value, validation_password.value, validation_password_conf.value);

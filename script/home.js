@@ -32,7 +32,7 @@ closeForm.addEventListener('click',()=>{
 
 const listarOrders=()=>{
   listOrders.innerHTML = `
-                        <p>Ordenes: ${ordersArray.length}
+                        <p>Ordenes: ${localStorage.length}
   `
 }
 
@@ -162,6 +162,7 @@ const createNewOrder = (e) => {
     ordersArray.push(newOrder);
     newOrder.getUnitValue()
     console.log(ordersArray);
+    console.log(newOrder);
     // creo la etiqueta que voy a incluir en el html
     // utilizo innerHTML para definir que voy a incluir en la tag
     // selecciono la constante que me llama el id donde voy a incluir la nueva etiqueta y uso append a prepend 
@@ -183,6 +184,7 @@ const createNewOrder = (e) => {
     `
     //Guardo nueva orden en localStora con número de orden como ID para usarla al momento de querer hacer el calculo. 
     const dataOrders = localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
+    
     display_orderModal.style.display = 'none'
     swal({
       title: `Orden ${get_order.value} Creada`,
@@ -223,6 +225,9 @@ listarOrders();
           if (willDelete) {
             localStorage.removeItem(`${imporId}`);
             btn.closest('tr').remove()
+            listOrders.innerHTML = `
+                        <p>Ordenes: ${localStorage.length}`
+
             swal(`Orden ${imporId} eliminada con éxito`, {
               icon: "success",
             });

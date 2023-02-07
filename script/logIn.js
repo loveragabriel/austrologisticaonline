@@ -11,7 +11,7 @@ logIn_off.addEventListener('click', ()=>{
 })
 
 //Función para validar usuario
-//Uso de getItem para tomar registro de usuario y verificar si está guardado en localStorage. 
+//Uso de getItem para tomar registro de usuario y verificar si está guardado en sessionStorage. 
 //Uso de parse
 logInUser.addEventListener('click',(e)=>{
     e.preventDefault()
@@ -19,7 +19,7 @@ logInUser.addEventListener('click',(e)=>{
     let email = check_email.value;
     let password =  check_password.value; 
     //Use the email value to call my storage 
-    let getUser = localStorage.getItem(email);
+    let getUser = sessionStorage.getItem(email);
     //Parse my object and get the email, password and name stored 
     try {
         let storedUser = (JSON.parse(getUser).validation_email);
