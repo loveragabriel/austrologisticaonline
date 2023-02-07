@@ -210,6 +210,9 @@ footer {
     left: 0;
  }
 
+body{
+    zoom: 80%;
+}
 
 .card-home{
     /* display: none; */
@@ -232,6 +235,15 @@ padding: 5px;    max-width: 10px;
 }
 }
 
+@media (max-width: 280px){
+
+
+body{
+    zoom: 45%;
+}
+}
+
+
 
 /* FORM */
 
@@ -240,13 +252,13 @@ padding: 5px;    max-width: 10px;
     position: absolute;
     flex-direction: column;
     top: 30vh;
-    left: 10vw;
-    right: 10vw;
+    margin: 0 auto;
+     left: 30vw;
+    /*right: 10vw; */
     background-color: white;
     padding: 1em;
     border-radius: 5px;
     box-shadow: 1px 1px 20px black;
-    margin-top: 10px;
     z-index: 2;
 }
 

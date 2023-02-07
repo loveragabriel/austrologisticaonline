@@ -34,14 +34,18 @@
   <main class="home-page">
     <!-- <h2 class="title-home">Calculemos una imporación</h2> -->
  
-    <div class="container bg-light rounded-4">
-      <div class="d-flex justify-content-between">
-        <h3>Gestión de Ordenes: </h3>
+    <div class="container-fluid text-black rounded-4 justify-content-between">
+      <div class="d-flex justify-content-between flex-wrap">
+        <h3>Gestión de Ordenes:</h3>
         <h2>Empresa S.A</h2>
       </div>
       <hr>
       <div class="container d-flex justify-content-between">
-        <i class="fa-solid fa-square-plus" id="modal-order"> Nueva Orden</i>
+        <div>
+          
+          <i class="fa-solid fa-square-plus" id="modal-order">  <span>Nueva Orden</span></i>
+
+        </div>
         <p class="sm">Estados: 🟠Pendientes</p>
         <div id="total-orders">
         </div>
@@ -49,7 +53,7 @@
     </div>
     <hr>
     
-    <table class="table" id="order-table">
+    <table class="table sm" id="order-table">
       <thead class="thead-light">
         <tr>
           <th>#Orden</th>
@@ -69,6 +73,7 @@
     </table>
     <div id="display-final-result">
     </div>
+    
     <form class="newOrder" id="form">
       <i class="fa-solid fa-x"></i>
       <h3 class="fw-bold">Crear una nueva order</h3>

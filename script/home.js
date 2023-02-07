@@ -21,6 +21,7 @@ let listOrders = document.getElementById('total-orders');
 let ordersArray = [];
 //Function display Modal
 
+
 modal_newOrder.addEventListener('click', ()=>{
   display_orderModal.style.display = 'flex'
 })
@@ -176,7 +177,7 @@ const createNewOrder = (e) => {
                         <td>${get_insurance.value}</td>
                         <td>${get_netkg.value}</td>
                         <td>${newOrder.getUnitValue().toFixed(2)}</td>
-                        <td><button id="delete" class='btn btn-danger btn-sm'>Eliminar</button></td>
+                        <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
                         <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
                         </tr>
     `
@@ -187,9 +188,11 @@ const createNewOrder = (e) => {
       title: `Orden ${get_order.value} Creada`,
       icon: "success",
     });
+    console.log(dataOrders);
 
-    
 listarOrders();
+
+
 
     //Función para operar con la orden generada
     //deleRow para eliminar una orden creada
@@ -199,22 +202,45 @@ listarOrders();
     getTable.addEventListener('click', (e) => {
 
       let btn = e.target
+      let imporId = btn.closest('button').value;
+      const getOrder = localStorage.getItem(`${imporId}`);
+        let retriveOrder = JSON.parse(getOrder);
+        let { orderNumber, shipper, cost, freight, insurance, netKg, unitValue } = retriveOrder
+
+
       const deleteRow = (e) => {
-        btn.closest('tr').remove()
+        // 
+        // listarOrders()
+        
+        swal({
+          title: `Seguro quieres eliminar tu order ${imporId}?`,
+          text: "Una vez lo elimines, no podrás recuperar tu orden",
+          icon: "warning",
+          buttons: true,
+          dangerMode: true,
+        })
+        .then((willDelete) => {
+          if (willDelete) {
+            localStorage.removeItem(`${imporId}`);
+            btn.closest('tr').remove()
+            swal(`Orden ${imporId} eliminada con éxito`, {
+              icon: "success",
+            });
+          } else {
+            swal("Tu Orden seguirá guardada");
+          }
+        });
 
       }
 
       const calcularImpo = (e) => {
         // this code return the id value but the all row
 
-        let imporId = btn.closest('button').value;
 
         {/**No usar por el momento*/ }
-        const getOrder = localStorage.getItem(`${imporId}`);
-        let retriveOrder = JSON.parse(getOrder);
+        
 
         //Uso de deconstructor
-        let { orderNumber, shipper, cost, freight, insurance, netKg, unitValue } = retriveOrder
 
         let itsRight = imporId === orderNumber;
         if (itsRight) {
