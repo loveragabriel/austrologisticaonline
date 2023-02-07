@@ -33,7 +33,44 @@
   </header>
   <main class="home-page">
     <!-- <h2 class="title-home">Calculemos una imporación</h2> -->
-    <form class="">
+ 
+    <div class="container bg-light rounded-4">
+      <div class="d-flex justify-content-between">
+        <h3>Gestión de Ordenes: </h3>
+        <h2>Empresa S.A</h2>
+      </div>
+      <hr>
+      <div class="container d-flex justify-content-between">
+        <i class="fa-solid fa-square-plus" id="modal-order"> Nueva Orden</i>
+        <p class="sm">Estados: 🟠Pendientes</p>
+        <div id="total-orders">
+        </div>
+      </div>
+    </div>
+    <hr>
+    
+    <table class="table" id="order-table">
+      <thead class="thead-light">
+        <tr>
+          <th>#Orden</th>
+          <th>Proveedor</th>
+          <th>Costo</th>
+          <th>Flete</th>
+          <th>Seguro</th>
+          <th>KG/Net</th>
+          <th>Unit/Precio</th>
+        </tr>
+      </thead>
+      <tbody id="new-col">
+        <tr id="orders-msj">
+          <td colspan="7" class="text-center">No hay ordenes para mostrar</td>
+        </tr>
+      </tbody>
+    </table>
+    <div id="display-final-result">
+    </div>
+    <form class="newOrder" id="form">
+      <i class="fa-solid fa-x"></i>
       <h3 class="fw-bold">Crear una nueva order</h3>
       <div class="form-group mt-2 sm">
         <label>Proveedor:
@@ -67,29 +104,6 @@
       </div>
       <button class="btn btn-primary m-3" type="submit" id="new-order">Crear</button>
     </form>
-    <h3>Gestión de Ordenes: </h3>
-    <table class="table" id="order-table">
-      <thead class="thead-light">
-        <tr>
-          <th>#Orden</th>
-          <th>Proveedor</th>
-          <th>Costo</th>
-          <th>Flete</th>
-          <th>Seguro</th>
-          <th>KG Net</th>
-          <th>Precio Unitario</th>
-        </tr>
-      </thead>
-      <tbody id="new-col">
-        <tr id="orders-msj">
-          <td colspan="7" class="text-center">No hay ordenes para mostrar</td>
-        </tr>
-      </tbody>
-    </table>
-    <div id="display-final-result">
-
-    </div>
-
   </main>
   <script defer src="../script/home.js"></script>
   <script src="/script/logIn.js"></script>

@@ -13,6 +13,30 @@ let set_order_msj = document.querySelector('#orders-msj');
 let inner_col = document.getElementById('new-col');
 let delete_order = document.getElementById('delete-order');
 let diplayFinalValue = document.getElementById('display-final-result');
+let modal_newOrder = document.getElementById('modal-order');
+let display_orderModal = document.querySelector('.newOrder');
+let closeForm = document.querySelector('.fa-x');
+let listOrders = document.getElementById('total-orders');
+
+let ordersArray = [];
+//Function display Modal
+
+modal_newOrder.addEventListener('click', ()=>{
+  display_orderModal.style.display = 'flex'
+})
+
+closeForm.addEventListener('click',()=>{
+  display_orderModal.style.display = 'none'
+})
+
+const listarOrders=()=>{
+  listOrders.innerHTML = `
+                        <p>Ordenes: ${ordersArray.length}
+  `
+}
+
+listarOrders();
+
 
 
 
@@ -50,7 +74,7 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
       let totalB = valorCalculo + (valorCalculo * 0.21) + (valorCalculo * 0.35);
       let impuestos = ((valorCalculo * 0.21) + (valorCalculo * 0.35)).toFixed(2);
       alert('Recuerde de deberá cumpliar con los impuestos correspondientes')
-      diplayFinalValue.innerHTML += `<div> 
+      diplayFinalValue.innerHTML = `<div> 
                                       <p>El valor de su mercadería en Buenos Aires es: </p>
                                       <p>Impuesto: ${impuestos} </p>
                                       <p>Valor en Aduana: ${valorCalculo} </p>
@@ -62,7 +86,7 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
     case 2:
       let camion = Number(prompt('Ingrese el valor de camión'));
       let totalR = valorCalculo + camion;
-      diplayFinalValue.innerHTML += `<div> 
+      diplayFinalValue.innerHTML = `<div> 
                                       <p>El valor de su mercadería en Rio Grande es: </p>
                                       <p>Valor del Transporte Terrestre: ${camion} </p>
                                       <p>Valor en Aduana: ${valorCalculo} </p>
@@ -73,7 +97,7 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
       alert('El valor en Aduana RGA es ' + totalR)
       break;
     case 3:
-      diplayFinalValue.innerHTML += `<div> 
+      diplayFinalValue.innerHTML = `<div> 
                                       <p>El valor de su mercadería en Zona Económica especial (Libre de impuestos) es: </p>
                                        <p>Valor en Aduana: ${valorCalculo} </p>
                                       <p>Valor Final: ${valorCalculo} </p>
@@ -91,7 +115,7 @@ closeDash.addEventListener('click', () => {
 })
 
 //Declaración de array para cargar las ordenes
-let ordersArray = [];
+
 //Creación de constructor 
 class Order {
   constructor(shipper, orderNumber, cost, freight, insurance, netKg) {
@@ -120,12 +144,17 @@ const createNewOrder = (e) => {
     get_netkg.value,);
   //Uso de Método push 
   if (get_shipper.value == '' ||
-    get_order.value == '',
-    get_fob.value == '',
-    get_freight.value == '',
-    get_insurance.value == '',
+    get_order.value == '' ||
+    get_fob.value == '' ||
+    get_freight.value == '' ||
+    get_insurance.value == '' ||
     get_netkg.value == '') {
-    alert('Debe completar todos los datos')
+      swal({
+        title: "Datos incompletos",
+        text: "Debes Ingresar todos los datos",
+        icon: "warning",
+        button: "Regresar",
+      });
 
   } else {
     newOrder.getUnitValue();
@@ -135,7 +164,7 @@ const createNewOrder = (e) => {
     // creo la etiqueta que voy a incluir en el html
     // utilizo innerHTML para definir que voy a incluir en la tag
     // selecciono la constante que me llama el id donde voy a incluir la nueva etiqueta y uso append a prepend 
-
+    
     document.getElementById('orders-msj').style.display = 'none'
     const newRow = document.getElementById('new-col');
     const getTable = document.querySelector('table');
@@ -153,6 +182,14 @@ const createNewOrder = (e) => {
     `
     //Guardo nueva orden en localStora con número de orden como ID para usarla al momento de querer hacer el calculo. 
     const dataOrders = localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
+    display_orderModal.style.display = 'none'
+    swal({
+      title: `Orden ${get_order.value} Creada`,
+      icon: "success",
+    });
+
+    
+listarOrders();
 
     //Función para operar con la orden generada
     //deleRow para eliminar una orden creada
@@ -199,6 +236,7 @@ const createNewOrder = (e) => {
   }
 
 }
+
 
 create_order.onclick = createNewOrder;
 

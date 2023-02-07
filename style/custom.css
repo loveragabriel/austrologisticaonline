@@ -240,8 +240,8 @@ padding: 5px;    max-width: 10px;
     position: absolute;
     flex-direction: column;
     top: 30vh;
-    left: 30vw;
-    right: 30vw;
+    left: 10vw;
+    right: 10vw;
     background-color: white;
     padding: 1em;
     border-radius: 5px;
@@ -299,6 +299,9 @@ padding: 5px;    max-width: 10px;
         min-width: 80vw;
     }
     }
+
+
+
 
 /* Dash */
 
@@ -361,4 +364,21 @@ padding-bottom: 2em;
 
 .title-home{
     text-align:center;
+}
+
+.newOrder{
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 5em;
+    background-color: #002E94;
+    align-items: stretch;
+    margin: 0 10vw  ;
+    max-width: 90vw;
+}
+
+.info-bar{
+    margin: 0 2em;
+    display: flex;
+    justify-content: space-between;
 }
