@@ -156,13 +156,22 @@ const createNewOrder = (e) => {
     console.log(newOrder);
     for (let i = 0; i < localStorage.length; i++) {
       if(localStorage.key(i) == get_order.value) {
-          alert('Existe'); }
-    }
-    if( localStorage.getItem(`${get_order.value}`) === get_order.value)
-    {
-      alert('Exist')
-    } else
-    localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
+        swal({
+                title: `Orden ${get_order.value} Existe`,
+                icon: "error",
+              });
+          return
+         }
+                 else {
+          localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
+          swal({
+            title: `Orden ${get_order.value} Creada`,
+            icon: "success",
+          });
+
+        }
+
+    } 
 
   }
   
