@@ -17,6 +17,9 @@ let modal_newOrder = document.getElementById('modal-order');
 let display_orderModal = document.querySelector('.newOrder');
 let closeForm = document.querySelector('.fa-x');
 let listOrders = document.getElementById('total-orders');
+const getTable = document.querySelector('table');
+let modal_form = document.getElementById('form');
+
 
 let ordersArray = [];
 //Function display Modal
@@ -153,27 +156,109 @@ const createNewOrder = (e) => {
 
   } else {
     newOrder.getUnitValue();
-    console.log(newOrder);
-    for (let i = 0; i < localStorage.length; i++) {
-      if(localStorage.key(i) == get_order.value) {
+    //console.log(newOrder);
+  
+      if (localStorage.getItem(`${get_order.value}`) !== null) {
         swal({
-                title: `Orden ${get_order.value} Existe`,
-                icon: "error",
-              });
-          return
-         }
-                 else {
+          title: `Orden ${get_order.value} Existe`,
+          icon: "warning",
+        });
+        return
+        } else {
+
           localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
           swal({
             title: `Orden ${get_order.value} Creada`,
             icon: "success",
-          });
-
+          }); 
+          modal_form.style.display = 'none'
+          document.getElementById('orders-msj').style.display = 'none'
+          const newRow = document.getElementById('new-col');
+          newRow.innerHTML += `<tr>
+                              <td value='${get_order.value}' >${get_order.value}</td>
+                              <td>${get_shipper.value}</td>
+                              <td>${get_fob.value}</td>
+                              <td>${get_freight.value}</td>
+                              <td>${get_insurance.value}</td>
+                              <td>${get_netkg.value}</td>
+                              <td>${newOrder.getUnitValue().toFixed(2)}</td>
+                              <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
+                              <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
+                              </tr>
+          `
+          listarOrders()
+      } 
         }
 
-    } 
+    }
+    
+    getTable.addEventListener('click', (e) => {
 
-  }
+            let btn = e.target
+            let imporId = btn.closest('button').value;
+            const getOrder = localStorage.getItem(`${imporId}`);
+              let retriveOrder = JSON.parse(getOrder);
+              let { orderNumber, shipper, cost, freight, insurance, netKg, unitValue } = retriveOrder
+      
+      
+            const deleteRow = (e) => {
+              // 
+              // listarOrders()
+              
+              swal({
+                title: `Seguro quieres eliminar tu order ${imporId}?`,
+                text: "Una vez lo elimines, no podrás recuperar tu orden",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+              })
+              .then((willDelete) => {
+                if (willDelete) {
+                  localStorage.removeItem(`${imporId}`);
+                  btn.closest('tr').remove()
+                  listOrders.innerHTML = `
+                              <p>Ordenes: ${localStorage.length}`
+                  if(localStorage.length==0){
+                    document.getElementById('orders-msj').style.display = 'flex'
+
+                  }
+                  swal(`Orden ${imporId} eliminada con éxito`, {
+                    icon: "success",
+                  });
+                } else {
+                  swal("Tu Orden seguirá guardada");
+                }
+              });
+      
+            }
+      
+            const calcularImpo = (e) => {
+              // this code return the id value but the all row
+      
+      
+              {/**No usar por el momento*/ }
+              
+      
+              //Uso de deconstructor
+      
+              let itsRight = imporId === orderNumber;
+              if (itsRight) {
+      
+                let costOrder = Number(cost);
+                let insuranceOrder = Number(insurance);
+                let freightOrder = Number(freight);
+      
+                valorIncoterm(costOrder, insuranceOrder, freightOrder)
+              }
+      
+            }
+      
+            let idBtn = btn.closest('button').id;
+            (idBtn === 'delete' ? deleteRow() : calcularImpo())
+      
+          })
+      
+        
   
   
   
@@ -296,7 +381,7 @@ const createNewOrder = (e) => {
 
 //   }
 
-}
+
 
 
 create_order.onclick = createNewOrder;
