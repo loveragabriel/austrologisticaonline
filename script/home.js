@@ -21,8 +21,9 @@ const getTable = document.querySelector('table');
 let modal_form = document.getElementById('form');
 
 
-let ordersArray =  JSON.parse(localStorage.getItem('dataOrders')) || [];
+let ordersArray =  JSON.parse(localStorage.getItem('dataOrders')) || [] ;
 //Function display Modal
+
 
 const listarOrders=()=>{
   listOrders.innerHTML = `<p>Ordenes: ${ordersArray.length}`
@@ -36,7 +37,6 @@ modal_newOrder.addEventListener('click', ()=>{
 closeForm.addEventListener('click',()=>{
   display_orderModal.style.display = 'none'
 })
-
 
 
 
@@ -85,41 +85,64 @@ const createNewOrder = (e) => {
     newOrder.getUnitValue();
     
     //console.log(newOrder);
-    ordersArray.push(newOrder);
-    
-    if (localStorage.getItem(`${get_order.value}`) !== null) {
-        swal({
-          title: `Orden ${get_order.value} Existe`,
-          icon: "warning",
-        });
-        return
-      } else {
-        
-          localStorage.setItem('dataOrders', JSON.stringify(ordersArray));
-          swal({
-            title: `Orden ${get_order.value} Creada`,
-            icon: "success",
-          }); 
-          modal_form.style.display = 'none'
-          document.getElementById('orders-msj').style.display = 'none'
-          const newRow = document.getElementById('new-col');
-          newRow.innerHTML += `<tr>
-          <td value='${get_order.value}' >${get_order.value}</td>
-                              <td>${get_shipper.value}</td>
-                              <td>${get_fob.value}</td>
-                              <td>${get_freight.value}</td>
-                              <td>${get_insurance.value}</td>
-                              <td>${get_netkg.value}</td>
-                              <td>${newOrder.getUnitValue().toFixed(2)}</td>
-                              <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
-                              <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
-                              </tr>
-          `
-          listarOrders()
-        } 
-        }
 
+      let checkOrder = get_order.value; 
+   
+      for (let i = 0; i < ordersArray.length; i++) {
+       // console.log(ordersArray[i]['orderNumber'],checkOrder)
+        if (ordersArray[i]['orderNumber'] === checkOrder) {
+          swal({
+                  title: `Orden ${get_order.value} Existe`,
+                  icon: "warning",
+                });
+                return console.log("Item already exists in the array.")
+         
+        }
       }
+      ordersArray.push(newOrder);
+      localStorage.setItem('dataOrders',JSON.stringify(ordersArray))
+      listarOrders();
+      swal({
+              title: `Orden ${get_order.value} Creada`,
+              icon: "success"});
+              return console.log("Item added to the array.");
+      }
+    
+    // ordersArray.push(newOrder);
+    
+    // if (localStorage.getItem(`${get_order.value}`) !== null) {
+    //     swal({
+    //       title: `Orden ${get_order.value} Existe`,
+    //       icon: "warning",
+    //     });
+    //     return
+    //   } else {
+        
+          // localStorage.setItem('dataOrders', JSON.stringify(ordersArray));
+          // swal({
+          //   title: `Orden ${get_order.value} Creada`,
+          //   icon: "success",
+          // }); 
+          // modal_form.style.display = 'none'
+          // document.getElementById('orders-msj').style.display = 'none'
+          // const newRow = document.getElementById('new-col');
+          // newRow.innerHTML += `<tr>
+          // <td value='${get_order.value}' >${get_order.value}</td>
+          //                     <td>${get_shipper.value}</td>
+          //                     <td>${get_fob.value}</td>
+          //                     <td>${get_freight.value}</td>
+          //                     <td>${get_insurance.value}</td>
+          //                     <td>${get_netkg.value}</td>
+          //                     <td>${newOrder.getUnitValue().toFixed(2)}</td>
+          //                     <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
+          //                     <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
+          //                     </tr>
+          // `
+          // listarOrders()
+        } 
+        
+
+      
       
     getTable.addEventListener('click', (e) => {
 
