@@ -38,8 +38,29 @@ closeForm.addEventListener('click',()=>{
   display_orderModal.style.display = 'none'
 })
 
+//Function drawOrder on screen 
+const drawOrders =()=>{
+  for (let i = 0; i < ordersArray.length; i++) {
+    let obj = ordersArray[i];
+  document.getElementById('orders-msj').style.display = 'none'
+                const newRow = document.getElementById('new-col');
+                const getTable = document.querySelector('table');
+                newRow.innerHTML += `<tr>
+                                    <td value='${ordersArray[i]['orderNumber']}' >${ordersArray[i]['orderNumber']}</td>
+                                    <td>${ordersArray[i]['shipper']}</td>
+                                    <td>${ordersArray[i]['cost']}</td>
+                                    <td>${ordersArray[i]['freight']}</td>
+                                    <td>${ordersArray[i]['insurance']}</td>
+                                    <td>${ordersArray[i]['netKg']}</td>
+                                    <td>${ordersArray[i]['unitValue']}</td>
+                                    <td><button id="delete"value='${ordersArray[i]['orderNumber']}' class='btn btn-danger btn-sm'>Eliminar</button></td>
+                                    <td><button id="importar" value='${ordersArray[i]['orderNumber']}' class='btn btn-success btn-sm'>Calcular</button></td>
+                                    </tr>
+                `
+}
+}
 
-
+document.addEventListener('DOMContentLoaded',drawOrders);
 //Declaración de array para cargar las ordenes
 //Creación de constructor 
 class Order {
@@ -102,6 +123,22 @@ const createNewOrder = (e) => {
       ordersArray.push(newOrder);
       localStorage.setItem('dataOrders',JSON.stringify(ordersArray))
       listarOrders();
+      document.getElementById('orders-msj').style.display = 'none'
+                const newRow = document.getElementById('new-col');
+                const getTable = document.querySelector('table');
+                newRow.innerHTML += `<tr>
+                                    <td value='${get_order.value}' >${get_order.value}</td>
+                                    <td>${get_shipper.value}</td>
+                                    <td>${get_fob.value}</td>
+                                    <td>${get_freight.value}</td>
+                                    <td>${get_insurance.value}</td>
+                                    <td>${get_netkg.value}</td>
+                                    <td>${newOrder.getUnitValue().toFixed(2)}</td>
+                                    <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
+                                    <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
+                                    </tr>
+                `
+   
       swal({
               title: `Orden ${get_order.value} Creada`,
               icon: "success"});
