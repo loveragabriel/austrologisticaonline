@@ -21,9 +21,13 @@ const getTable = document.querySelector('table');
 let modal_form = document.getElementById('form');
 
 
-let ordersArray = [];
+let ordersArray =  JSON.parse(localStorage.getItem('dataOrders')) || [];
 //Function display Modal
 
+const listarOrders=()=>{
+  listOrders.innerHTML = `<p>Ordenes: ${ordersArray.length}`
+}
+listarOrders();
 
 modal_newOrder.addEventListener('click', ()=>{
   display_orderModal.style.display = 'flex'
@@ -33,87 +37,10 @@ closeForm.addEventListener('click',()=>{
   display_orderModal.style.display = 'none'
 })
 
-const listarOrders=()=>{
-  listOrders.innerHTML = `<p>Ordenes: ${localStorage.length}`
-}
-listarOrders();
 
-//Funcion suma de costos - incorporación de condicionales
-const valorIncoterm = (valorCosto, valorSeguro, valorFlete) => {
-  if (!valorCosto || valorCosto == 0 || valorCosto == '') {
-    alert('Debe Ingresar valor de su mercaderí, intente nuevamente.')
-  } else if (!valorFlete || valorFlete == 0 || valorFlete == '') {
-    alert('Debe ingresar el valor del flete');
-  }
-  else if (valorCosto && !valorSeguro || valorSeguro == 0 || valorSeguro == '' && valorFlete) {
-    let valorAduana = valorCosto + (valorCosto * 0.01) + valorFlete;
-    alert('El valor del seguro será del 1% del costo de la mercadería ingresada');
-    let aduana = Number(prompt('Ingrese la aduana de destino \n 1. BUE \n 2. RGA \n 3. USH'));
-    funcionParaAduana(aduana, valorAduana);
-  } else if (valorCosto, valorSeguro, valorFlete) {
-    let valorAduana = valorCosto + valorSeguro + valorFlete;
-    let aduana = Number(prompt('Ingrese la aduana de destino \n 1. BUE \n 2. RGA \n 3. USH'));
-    funcionParaAduana(aduana, valorAduana);
-  }
-  else alert('Los valores son incorrectos')
-}
 
-//Función para eliminar elemento HTML onClick.
-let deleteDetails = document.getElementById('clean-screen');
-diplayFinalValue.addEventListener('click', () => {
-  diplayFinalValue.style.display = 'none';
-})
-
-// Funcion para calcular valor aduana Uso de Switch 
-//Uso de innerHTML para dibujar elemento HTML en el DOM desde js. 
-const funcionParaAduana = (valorCase, valorCalculo) => {
-  switch (valorCase) {
-    case 1:
-      let totalB = valorCalculo + (valorCalculo * 0.21) + (valorCalculo * 0.35);
-      let impuestos = ((valorCalculo * 0.21) + (valorCalculo * 0.35)).toFixed(2);
-      alert('Recuerde de deberá cumpliar con los impuestos correspondientes')
-      diplayFinalValue.innerHTML = `<div> 
-                                      <p>El valor de su mercadería en Buenos Aires es: </p>
-                                      <p>Impuesto: ${impuestos} </p>
-                                      <p>Valor en Aduana: ${valorCalculo} </p>
-                                      <p>Valor Final: ${totalB} </p>
-                                      <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
-                                    </div>
-                                    `;
-      break;
-    case 2:
-      let camion = Number(prompt('Ingrese el valor de camión'));
-      let totalR = valorCalculo + camion;
-      diplayFinalValue.innerHTML = `<div> 
-                                      <p>El valor de su mercadería en Rio Grande es: </p>
-                                      <p>Valor del Transporte Terrestre: ${camion} </p>
-                                      <p>Valor en Aduana: ${valorCalculo} </p>
-                                      <p>Valor Final: ${totalR} </p>
-                                      <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
-                                    </div>
-                                    `;
-      alert('El valor en Aduana RGA es ' + totalR)
-      break;
-    case 3:
-      diplayFinalValue.innerHTML = `<div> 
-                                      <p>El valor de su mercadería en Zona Económica especial (Libre de impuestos) es: </p>
-                                       <p>Valor en Aduana: ${valorCalculo} </p>
-                                      <p>Valor Final: ${valorCalculo} </p>
-                                      <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
-                                      </div>
-                                    `;
-      break;
-    default:
-      alert('Debes ingresar una aduana correcta');
-  }
-}
-
-closeDash.addEventListener('click', () => {
-  location.href = '../index.html';
-})
 
 //Declaración de array para cargar las ordenes
-
 //Creación de constructor 
 class Order {
   constructor(shipper, orderNumber, cost, freight, insurance, netKg) {
@@ -140,8 +67,8 @@ const createNewOrder = (e) => {
     get_freight.value,
     get_insurance.value,
     get_netkg.value,);
-
-  if (get_shipper.value == '' ||
+    
+    if (get_shipper.value == '' ||
     get_order.value == '' ||
     get_fob.value == '' ||
     get_freight.value == '' ||
@@ -154,19 +81,21 @@ const createNewOrder = (e) => {
         button: "Regresar",
       });
 
-  } else {
+    } else {
     newOrder.getUnitValue();
+    
     //console.log(newOrder);
-  
-      if (localStorage.getItem(`${get_order.value}`) !== null) {
+    ordersArray.push(newOrder);
+    
+    if (localStorage.getItem(`${get_order.value}`) !== null) {
         swal({
           title: `Orden ${get_order.value} Existe`,
           icon: "warning",
         });
         return
-        } else {
-
-          localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
+      } else {
+        
+          localStorage.setItem('dataOrders', JSON.stringify(ordersArray));
           swal({
             title: `Orden ${get_order.value} Creada`,
             icon: "success",
@@ -175,7 +104,7 @@ const createNewOrder = (e) => {
           document.getElementById('orders-msj').style.display = 'none'
           const newRow = document.getElementById('new-col');
           newRow.innerHTML += `<tr>
-                              <td value='${get_order.value}' >${get_order.value}</td>
+          <td value='${get_order.value}' >${get_order.value}</td>
                               <td>${get_shipper.value}</td>
                               <td>${get_fob.value}</td>
                               <td>${get_freight.value}</td>
@@ -187,22 +116,22 @@ const createNewOrder = (e) => {
                               </tr>
           `
           listarOrders()
-      } 
+        } 
         }
 
-    }
-    
+      }
+      
     getTable.addEventListener('click', (e) => {
 
-            let btn = e.target
-            let imporId = btn.closest('button').value;
+      let btn = e.target
+      let imporId = btn.closest('button').value;
             const getOrder = localStorage.getItem(`${imporId}`);
-              let retriveOrder = JSON.parse(getOrder);
+            let retriveOrder = JSON.parse(getOrder);
               let { orderNumber, shipper, cost, freight, insurance, netKg, unitValue } = retriveOrder
+              
       
-      
-            const deleteRow = (e) => {
-              // 
+              const deleteRow = (e) => {
+                // 
               // listarOrders()
               
               swal({
@@ -220,7 +149,7 @@ const createNewOrder = (e) => {
                               <p>Ordenes: ${localStorage.length}`
                   if(localStorage.length==0){
                     document.getElementById('orders-msj').style.display = 'flex'
-
+                    
                   }
                   swal(`Orden ${imporId} eliminada con éxito`, {
                     icon: "success",
@@ -238,16 +167,16 @@ const createNewOrder = (e) => {
       
               {/**No usar por el momento*/ }
               
-      
+              
               //Uso de deconstructor
-      
+              
               let itsRight = imporId === orderNumber;
               if (itsRight) {
       
                 let costOrder = Number(cost);
                 let insuranceOrder = Number(insurance);
                 let freightOrder = Number(freight);
-      
+                
                 valorIncoterm(costOrder, insuranceOrder, freightOrder)
               }
       
@@ -258,53 +187,40 @@ const createNewOrder = (e) => {
       
           })
       
-        
-  
-  
-  
-//   else {
-    
-
-
-
-
-
-
-
-
-
-
-//     ordersArray.push(newOrder);
-//     newOrder.getUnitValue()
-//     console.log(ordersArray);
-//     console.log(newOrder);
-//     // creo la etiqueta que voy a incluir en el html
-//     // utilizo innerHTML para definir que voy a incluir en la tag
-//     // selecciono la constante que me llama el id donde voy a incluir la nueva etiqueta y uso append a prepend 
-    
-//     document.getElementById('orders-msj').style.display = 'none'
-//     const newRow = document.getElementById('new-col');
-//     const getTable = document.querySelector('table');
-//     newRow.innerHTML += `<tr>
-//                         <td value='${get_order.value}' >${get_order.value}</td>
-//                         <td>${get_shipper.value}</td>
-//                         <td>${get_fob.value}</td>
-//                         <td>${get_freight.value}</td>
-//                         <td>${get_insurance.value}</td>
-//                         <td>${get_netkg.value}</td>
-//                         <td>${newOrder.getUnitValue().toFixed(2)}</td>
-//                         <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
-//                         <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
-//                         </tr>
-//     `
-//     //Guardo nueva orden en localStora con número de orden como ID para usarla al momento de querer hacer el calculo. 
-//     const dataOrders = localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
-    
-//     display_orderModal.style.display = 'none'
-//     swal({
+          
+          
+          
+                  
+            //     ordersArray.push(newOrder);
+            //     newOrder.getUnitValue()
+            //     console.log(ordersArray);
+            //     console.log(newOrder);
+            //     // creo la etiqueta que voy a incluir en el html
+            //     // utilizo innerHTML para definir que voy a incluir en la tag
+            //     // selecciono la constante que me llama el id donde voy a incluir la nueva etiqueta y uso append a prepend 
+            
+            //     document.getElementById('orders-msj').style.display = 'none'
+            //     const newRow = document.getElementById('new-col');
+            //     const getTable = document.querySelector('table');
+            //     newRow.innerHTML += `<tr>
+            //                         <td value='${get_order.value}' >${get_order.value}</td>
+            //                         <td>${get_shipper.value}</td>
+            //                         <td>${get_fob.value}</td>
+            //                         <td>${get_freight.value}</td>
+            //                         <td>${get_insurance.value}</td>
+            //                         <td>${get_netkg.value}</td>
+            //                         <td>${newOrder.getUnitValue().toFixed(2)}</td>
+            //                         <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
+            //                         <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
+            //                         </tr>
+            //     `
+            //     //Guardo nueva orden en localStora con número de orden como ID para usarla al momento de querer hacer el calculo. 
+            //     const dataOrders = localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
+            
+            //     display_orderModal.style.display = 'none'
+            //     swal({
 //       title: `Orden ${get_order.value} Creada`,
 //       icon: "success",
-//     });
 //     console.log(dataOrders);
 
 // listarOrders();
@@ -317,16 +233,16 @@ const createNewOrder = (e) => {
 //     //Uso de la función funcionParaAduana para hacer los calculos e imprimir resultado en el DOM. 
 //     //Uso de deconstructor para objetos
 //     getTable.addEventListener('click', (e) => {
-
-//       let btn = e.target
-//       let imporId = btn.closest('button').value;
-//       const getOrder = localStorage.getItem(`${imporId}`);
-//         let retriveOrder = JSON.parse(getOrder);
-//         let { orderNumber, shipper, cost, freight, insurance, netKg, unitValue } = retriveOrder
-
-
-//       const deleteRow = (e) => {
-//         // 
+  
+  //       let btn = e.target
+  //       let imporId = btn.closest('button').value;
+  //       const getOrder = localStorage.getItem(`${imporId}`);
+  //         let retriveOrder = JSON.parse(getOrder);
+  //         let { orderNumber, shipper, cost, freight, insurance, netKg, unitValue } = retriveOrder
+  
+  
+  //       const deleteRow = (e) => {
+    //         // 
 //         // listarOrders()
         
 //         swal({
@@ -337,8 +253,8 @@ const createNewOrder = (e) => {
 //           dangerMode: true,
 //         })
 //         .then((willDelete) => {
-//           if (willDelete) {
-//             localStorage.removeItem(`${imporId}`);
+  //           if (willDelete) {
+    //             localStorage.removeItem(`${imporId}`);
 //             btn.closest('tr').remove()
 //             listOrders.innerHTML = `
 //                         <p>Ordenes: ${localStorage.length}`
@@ -347,43 +263,121 @@ const createNewOrder = (e) => {
 //               icon: "success",
 //             });
 //           } else {
-//             swal("Tu Orden seguirá guardada");
+  //             swal("Tu Orden seguirá guardada");
 //           }
 //         });
 
 //       }
 
 //       const calcularImpo = (e) => {
-//         // this code return the id value but the all row
-
-
-//         {/**No usar por el momento*/ }
-        
-
-//         //Uso de deconstructor
-
-//         let itsRight = imporId === orderNumber;
-//         if (itsRight) {
-
-//           let costOrder = Number(cost);
-//           let insuranceOrder = Number(insurance);
-//           let freightOrder = Number(freight);
-
-//           valorIncoterm(costOrder, insuranceOrder, freightOrder)
-//         }
-
-//       }
-
-//       let idBtn = btn.closest('button').id;
-//       (idBtn === 'delete' ? deleteRow() : calcularImpo())
-
-//     })
-
-//   }
-
-
-
-
-create_order.onclick = createNewOrder;
-
-
+  //         // this code return the id value but the all row
+  
+  
+  //         {/**No usar por el momento*/ }
+  
+  
+  //         //Uso de deconstructor
+  
+  //         let itsRight = imporId === orderNumber;
+  //         if (itsRight) {
+    
+    //           let costOrder = Number(cost);
+    //           let insuranceOrder = Number(insurance);
+    //           let freightOrder = Number(freight);
+    
+    //           valorIncoterm(costOrder, insuranceOrder, freightOrder)
+    //         }
+    
+    //       }
+    
+    //       let idBtn = btn.closest('button').id;
+    //       (idBtn === 'delete' ? deleteRow() : calcularImpo())
+    
+    //     })
+    
+    //   }
+    
+    
+    
+    
+    create_order.onclick = createNewOrder;
+    
+    
+    
+    
+    
+    //Funcion suma de costos - incorporación de condicionales
+    const valorIncoterm = (valorCosto, valorSeguro, valorFlete) => {
+      if (!valorCosto || valorCosto == 0 || valorCosto == '') {
+        alert('Debe Ingresar valor de su mercaderí, intente nuevamente.')
+      } else if (!valorFlete || valorFlete == 0 || valorFlete == '') {
+        alert('Debe ingresar el valor del flete');
+      }
+      else if (valorCosto && !valorSeguro || valorSeguro == 0 || valorSeguro == '' && valorFlete) {
+        let valorAduana = valorCosto + (valorCosto * 0.01) + valorFlete;
+        alert('El valor del seguro será del 1% del costo de la mercadería ingresada');
+        let aduana = Number(prompt('Ingrese la aduana de destino \n 1. BUE \n 2. RGA \n 3. USH'));
+        funcionParaAduana(aduana, valorAduana);
+      } else if (valorCosto, valorSeguro, valorFlete) {
+        let valorAduana = valorCosto + valorSeguro + valorFlete;
+        let aduana = Number(prompt('Ingrese la aduana de destino \n 1. BUE \n 2. RGA \n 3. USH'));
+        funcionParaAduana(aduana, valorAduana);
+      }
+      else alert('Los valores son incorrectos')
+    }
+    
+    //Función para eliminar elemento HTML onClick.
+    let deleteDetails = document.getElementById('clean-screen');
+    diplayFinalValue.addEventListener('click', () => {
+      diplayFinalValue.style.display = 'none';
+    })
+    
+    // Funcion para calcular valor aduana Uso de Switch 
+    //Uso de innerHTML para dibujar elemento HTML en el DOM desde js. 
+    const funcionParaAduana = (valorCase, valorCalculo) => {
+      switch (valorCase) {
+        case 1:
+          let totalB = valorCalculo + (valorCalculo * 0.21) + (valorCalculo * 0.35);
+          let impuestos = ((valorCalculo * 0.21) + (valorCalculo * 0.35)).toFixed(2);
+          alert('Recuerde de deberá cumpliar con los impuestos correspondientes')
+          diplayFinalValue.innerHTML = `<div> 
+                                          <p>El valor de su mercadería en Buenos Aires es: </p>
+                                          <p>Impuesto: ${impuestos} </p>
+                                          <p>Valor en Aduana: ${valorCalculo} </p>
+                                          <p>Valor Final: ${totalB} </p>
+                                          <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
+                                        </div>
+                                        `;
+          break;
+        case 2:
+          let camion = Number(prompt('Ingrese el valor de camión'));
+          let totalR = valorCalculo + camion;
+          diplayFinalValue.innerHTML = `<div> 
+                                          <p>El valor de su mercadería en Rio Grande es: </p>
+                                          <p>Valor del Transporte Terrestre: ${camion} </p>
+                                          <p>Valor en Aduana: ${valorCalculo} </p>
+                                          <p>Valor Final: ${totalR} </p>
+                                          <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
+                                        </div>
+                                        `;
+          alert('El valor en Aduana RGA es ' + totalR)
+          break;
+        case 3:
+          diplayFinalValue.innerHTML = `<div> 
+                                          <p>El valor de su mercadería en Zona Económica especial (Libre de impuestos) es: </p>
+                                           <p>Valor en Aduana: ${valorCalculo} </p>
+                                          <p>Valor Final: ${valorCalculo} </p>
+                                          <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
+                                          </div>
+                                        `;
+          break;
+        default:
+          alert('Debes ingresar una aduana correcta');
+      }
+    }
+    
+    closeDash.addEventListener('click', () => {
+      location.href = '../index.html';
+    })
+    
+    //     });
