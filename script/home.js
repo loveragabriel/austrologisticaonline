@@ -71,6 +71,15 @@ const drawOrders = () => {
   }
 }
 
+// get Item for operate operations 
+const getItemforOperation=(id)=>{
+  let getArrayLocalStorage = JSON.parse(localStorage.getItem('dataOrders'));
+  let rowIndexLocalStorage = getArrayLocalStorage.filter(element => element.orderNumber == id )
+  let rowForOperate =  rowIndexLocalStorage.forEach(element =>  element); 
+
+
+}
+
 document.addEventListener('DOMContentLoaded', drawOrders);
 //Declaración de array para cargar las ordenes
 //Creación de constructor 
@@ -192,24 +201,15 @@ const createNewOrder = (e) => {
   // listarOrders()
 }
 
-
-
-
 getTable.addEventListener('click', (e) => {
 
   let btn = e.target
   let imporId = btn.closest('button').value;
   console.log(imporId);
   
-
- //const getOrder = ordersArray(`${imporId}`);
-  // let retriveOrder = JSON.parse(getOrder);
-  // let { orderNumber, shipper, cost, freight, insurance, netKg, unitValue } = retriveOrder
-
-
-  const deleteRow = (e) => {
+ const deleteRow = (e) => {
     // 
-    // listarOrders()
+    listarOrders()
 
     swal({
       title: `Seguro quieres eliminar tu order ${imporId}?`,
@@ -249,6 +249,11 @@ getTable.addEventListener('click', (e) => {
 
     //Uso de deconstructor
 
+    let getArrayLocalStorage = JSON.parse(localStorage.getItem('dataOrders'));
+    let rowIndexLocalStorage = getArrayLocalStorage.filter(element => element.orderNumber == `${imporId}` )
+    let rowForOperate =  rowIndexLocalStorage.forEach(element =>  element); 
+    for (let i = 0; i < rowIndexLocalStorage.length; i++) {
+      let {cost, freight, insurance, orderNumber} = rowIndexLocalStorage[i];
     let itsRight = imporId === orderNumber;
     if (itsRight) {
 
@@ -260,16 +265,13 @@ getTable.addEventListener('click', (e) => {
     }
 
   }
-
+}
   let idBtn = btn.closest('button').id;
   (idBtn === 'delete' ? deleteRow() : calcularImpo())
 
 })
 
-
-
-
-
+{/**
 //     ordersArray.push(newOrder);
 //     newOrder.getUnitValue()
 //     console.log(ordersArray);
@@ -352,7 +354,7 @@ getTable.addEventListener('click', (e) => {
 //         // this code return the id value but the all row
 
 
-//         {/**No usar por el momento*/ }
+//         {/**No usar por el momento
 
 
 //         //Uso de deconstructor
@@ -375,8 +377,7 @@ getTable.addEventListener('click', (e) => {
 //     })
 
 //   }
-
-
+*/}
 
 
 create_order.onclick = createNewOrder;
