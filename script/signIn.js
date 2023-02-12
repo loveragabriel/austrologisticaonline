@@ -76,8 +76,11 @@ const createNewUse = (e) => {
       console.log(JSON.parse(getUser));
     }
     saveNewUser(validation_name.value, validation_email.value, validation_password.value, validation_password_conf.value);
-    alert(` ¡Bienvenido ${validation_name.value}!😎`)
-    location.href = 'austroligisticonline/pages/home.html';
+    swal({
+      title: `Usuario Creado`,
+      icon: "success"
+    });
+    location.href = '/pages/home.html';
 
   }
 

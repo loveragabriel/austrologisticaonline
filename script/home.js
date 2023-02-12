@@ -23,6 +23,15 @@ let modal_form = document.getElementById('form');
 let ordersArray = JSON.parse(localStorage.getItem('dataOrders')) || [];
 //Function display Modal
 
+Toastify({
+  text: `Bienvenid@`,
+  offset: {
+    duration: 2000,
+    x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+    y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+  },
+}).showToast();
+
 
 const listarOrders = () => {
   listOrders.innerHTML = `<p>Ordenes: ${ordersArray.length}`
@@ -160,11 +169,11 @@ const createNewOrder = (e) => {
                 `
     form.reset();
    display_orderModal.style.display = 'none'
-
-    swal({
-      title: `Orden ${get_order.value} Creada`,
-      icon: "success"
-    });
+   Toastify({
+    text: "Orden Creada",
+    duration: 3000
+    }).showToast();
+  
     return console.log("Item added to the array.");
   }
 
@@ -230,9 +239,18 @@ getTable.addEventListener('click', (e) => {
             document.getElementById('orders-msj').style.display = 'flex'
 
           }
-          swal(`Orden ${imporId} eliminada con éxito`, {
-            icon: "success",
-          });
+          Toastify({
+            text: `Orden eliminada `,
+            className: "info",
+            style: {
+              background: "linear-gradient(to right, #00b09b, #96c93d)",
+            }
+          }).showToast();
+          
+
+          // swal(`Orden ${imporId} eliminada con éxito`, {
+          //   icon: "success",
+          // });
         } else {
           swal("Tu Orden seguirá guardada");
         }

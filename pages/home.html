@@ -12,6 +12,8 @@
     integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
   <!-- font-awesome -->
   <script src="https://kit.fontawesome.com/f9bbe18ed9.js" crossorigin="anonymous"></script>
+  <!-- toastify-js -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
   <!-- Style-code -->
   <link rel="stylesheet" type="text/css" href="../style/custom.css">
   <!-- Tab Title -->
@@ -43,7 +45,7 @@
       <div class="container d-flex justify-content-between">
         <div>
           
-          <i class="fa-solid fa-square-plus" id="modal-order">  <span>Nueva Orden</span></i>
+          <i class="fa-solid fa-square-plus" id="modal-order">  <span>Crear Orden</span></i>
 
         </div>
         <p class="sm">Estados: 🟠Pendientes</p>
@@ -74,7 +76,7 @@
     <div id="display-final-result">
     </div>
     
-    <form class="newOrder" id="form">
+    <form class="form-group form-group newOrder" id="form">
       <i class="fa-solid fa-x"></i>
       <h3 class="fw-bold">Crear una nueva order</h3>
       <div class="form-group mt-2 sm">
@@ -113,6 +115,8 @@
   <script defer src="../script/home.js"></script>
   <script src="/script/logIn.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
 </body>
 
 </html>
