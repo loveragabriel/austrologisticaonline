@@ -25,7 +25,7 @@ let ordersArray = JSON.parse(localStorage.getItem('dataOrders')) || [];
 
 
 const listarOrders = () => {
-  listOrders.innerHTML = `<p>Ordenes: ${JSON.parse(localStorage.getItem('dataOrders')).length}`
+  listOrders.innerHTML = `<p>Ordenes: ${ordersArray.length}`
 }
 listarOrders();
 
