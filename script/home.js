@@ -3,7 +3,6 @@ let user = document.getElementById('user-dash');
 let _email = document.getElementById('email');
 let get_shipper = document.getElementById('shipper')
 let get_order = document.getElementById('order');
-let get_status = document.getElementById('status');
 let get_fob = document.getElementById('fob')
 let get_freight = document.getElementById('freight')
 let get_insurance = document.getElementById('insurance')
@@ -20,6 +19,9 @@ let closeForm = document.querySelector('.fa-x');
 let listOrders = document.getElementById('total-orders');
 const getTable = document.querySelector('table');
 let modal_form = document.getElementById('form');
+
+// function for modal import calculation
+let diplay_Import_Cal = document.getElementById('model-import-calculation');
 
 let ordersArray = JSON.parse(localStorage.getItem('dataOrders')) || [];
 //Function display Modal
@@ -86,18 +88,15 @@ const getItemforOperation=(id)=>{
   let getArrayLocalStorage = JSON.parse(localStorage.getItem('dataOrders'));
   let rowIndexLocalStorage = getArrayLocalStorage.filter(element => element.orderNumber == id )
   let rowForOperate =  rowIndexLocalStorage.forEach(element =>  element); 
-
-
 }
 
 document.addEventListener('DOMContentLoaded', drawOrders);
 //Declaración de array para cargar las ordenes
 //Creación de constructor 
 class Order {
-  constructor(shipper, orderNumber, estado, cost, freight, insurance, netKg, ) {
+  constructor(shipper, orderNumber, cost, freight, insurance, netKg) {
     this.shipper = shipper.toUpperCase();
     this.orderNumber = orderNumber;
-    this.estado = estado;
     this.cost = cost;
     this.freight = freight;
     this.insurance = insurance;
@@ -115,7 +114,6 @@ const createNewOrder = (e) => {
   //Use de constructor
   let newOrder = new Order(get_shipper.value,
     get_order.value,
-    get_status.value,
     get_fob.value,
     get_freight.value,
     get_insurance.value,
@@ -123,7 +121,6 @@ const createNewOrder = (e) => {
 
   if (get_shipper.value == '' ||
     get_order.value == '' ||
-    get_fob.value == '' ||
     get_fob.value == '' ||
     get_freight.value == '' ||
     get_insurance.value == '' ||
@@ -136,7 +133,7 @@ const createNewOrder = (e) => {
     });
 
   } else {
-    newOrder.getUnitValue();
+    newOrder.getUnitValue().toFixed(2);
 
     //console.log(newOrder);
 
@@ -161,16 +158,16 @@ const createNewOrder = (e) => {
     const getTable = document.querySelector('table');
     newRow.innerHTML += `<tr>
                                     <td value='${get_order.value}' >${get_order.value}</td>
-                                    <td value='${get_fob.value}'>${get_fob.value}<td>
                                     <td>${get_shipper.value}</td>
                                     <td>${get_fob.value}</td>
                                     <td>${get_freight.value}</td>
                                     <td>${get_insurance.value}</td>
                                     <td>${get_netkg.value}</td>
-                                    <td>${newOrder.getUnitValue().toFixed(2)}</td>
+                                    <td>${newOrder.getUnitValue()}</td>
                                     <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
                                     <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
                                     </tr>
+                                  
                 `
     form.reset();
    display_orderModal.style.display = 'none'
@@ -181,38 +178,6 @@ const createNewOrder = (e) => {
   
     return console.log("Item added to the array.");
   }
-
-  // ordersArray.push(newOrder);
-
-  // if (localStorage.getItem(`${get_order.value}`) !== null) {
-  //     swal({
-  //       title: `Orden ${get_order.value} Existe`,
-  //       icon: "warning",
-  //     });
-  //     return
-  //   } else {
-
-  // localStorage.setItem('dataOrders', JSON.stringify(ordersArray));
-  // swal({
-  //   title: `Orden ${get_order.value} Creada`,
-  //   icon: "success",
-  // }); 
-  // modal_form.style.display = 'none'
-  // document.getElementById('orders-msj').style.display = 'none'
-  // const newRow = document.getElementById('new-col');
-  // newRow.innerHTML += `<tr>
-  // <td value='${get_order.value}' >${get_order.value}</td>
-  //                     <td>${get_shipper.value}</td>
-  //                     <td>${get_fob.value}</td>
-  //                     <td>${get_freight.value}</td>
-  //                     <td>${get_insurance.value}</td>
-  //                     <td>${get_netkg.value}</td>
-  //                     <td>${newOrder.getUnitValue().toFixed(2)}</td>
-  //                     <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
-  //                     <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
-  //                     </tr>
-  // `
-  // listarOrders()
 }
 
 getTable.addEventListener('click', (e) => {
@@ -245,17 +210,13 @@ getTable.addEventListener('click', (e) => {
 
           }
           Toastify({
-            text: `Orden eliminada `,
+            text: `Orden ${imporId} eliminada `,
             className: "info",
             style: {
               background: "linear-gradient(to right, #00b09b, #96c93d)",
             }
           }).showToast();
-          
 
-          // swal(`Orden ${imporId} eliminada con éxito`, {
-          //   icon: "success",
-          // });
         } else {
           swal("Tu Orden seguirá guardada");
         }
@@ -276,15 +237,19 @@ getTable.addEventListener('click', (e) => {
     let rowIndexLocalStorage = getArrayLocalStorage.filter(element => element.orderNumber == `${imporId}` )
     let rowForOperate =  rowIndexLocalStorage.forEach(element =>  element); 
     for (let i = 0; i < rowIndexLocalStorage.length; i++) {
-      let {cost, freight, insurance, orderNumber} = rowIndexLocalStorage[i];
+      let { cost, freight, insurance,netKg, orderNumber,shipper,unitValue} = rowIndexLocalStorage[i];
+      console.log(rowIndexLocalStorage)
     let itsRight = imporId === orderNumber;
     if (itsRight) {
 
       let costOrder = Number(cost);
       let insuranceOrder = Number(insurance);
       let freightOrder = Number(freight);
+      let shipperOrder = String(shipper);
+      let netKgOrder = Number(netKg); 
+      let unitValueOrder = Number(unitValue);
 
-      valorIncoterm(costOrder, insuranceOrder, freightOrder)
+      valorIncoterm(costOrder, insuranceOrder, freightOrder, shipperOrder, netKgOrder,unitValueOrder)
     }
 
   }
@@ -294,123 +259,46 @@ getTable.addEventListener('click', (e) => {
 
 })
 
-{/**
-//     ordersArray.push(newOrder);
-//     newOrder.getUnitValue()
-//     console.log(ordersArray);
-//     console.log(newOrder);
-//     // creo la etiqueta que voy a incluir en el html
-//     // utilizo innerHTML para definir que voy a incluir en la tag
-//     // selecciono la constante que me llama el id donde voy a incluir la nueva etiqueta y uso append a prepend 
-
-//     document.getElementById('orders-msj').style.display = 'none'
-//     const newRow = document.getElementById('new-col');
-//     const getTable = document.querySelector('table');
-//     newRow.innerHTML += `<tr>
-//                         <td value='${get_order.value}' >${get_order.value}</td>
-//                         <td>${get_shipper.value}</td>
-//                         <td>${get_fob.value}</td>
-//                         <td>${get_freight.value}</td>
-//                         <td>${get_insurance.value}</td>
-//                         <td>${get_netkg.value}</td>
-//                         <td>${newOrder.getUnitValue().toFixed(2)}</td>
-//                         <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
-//                         <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
-//                         </tr>
-//     `
-//     //Guardo nueva orden en localStora con número de orden como ID para usarla al momento de querer hacer el calculo. 
-//     const dataOrders = localStorage.setItem(`${get_order.value}`, JSON.stringify(newOrder));
-
-//     display_orderModal.style.display = 'none'
-//     swal({
-//       title: `Orden ${get_order.value} Creada`,
-//       icon: "success",
-//     console.log(dataOrders);
-
-// listarOrders();
-
-
-
-//     //Función para operar con la orden generada
-//     //deleRow para eliminar una orden creada
-//     //calculrImpo para realizar el calculo de importación con los datos guardados en localStorage de la orden. 
-//     //Uso de la función funcionParaAduana para hacer los calculos e imprimir resultado en el DOM. 
-//     //Uso de deconstructor para objetos
-//     getTable.addEventListener('click', (e) => {
-
-//       let btn = e.target
-//       let imporId = btn.closest('button').value;
-//       const getOrder = localStorage.getItem(`${imporId}`);
-//         let retriveOrder = JSON.parse(getOrder);
-//         let { orderNumber, shipper, cost, freight, insurance, netKg, unitValue } = retriveOrder
-
-
-//       const deleteRow = (e) => {
-//         // 
-//         // listarOrders()
-
-//         swal({
-//           title: `Seguro quieres eliminar tu order ${imporId}?`,
-//           text: "Una vez lo elimines, no podrás recuperar tu orden",
-//           icon: "warning",
-//           buttons: true,
-//           dangerMode: true,
-//         })
-//         .then((willDelete) => {
-//           if (willDelete) {
-//             localStorage.removeItem(`${imporId}`);
-//             btn.closest('tr').remove()
-//             listOrders.innerHTML = `
-//                         <p>Ordenes: ${localStorage.length}`
-
-//             swal(`Orden ${imporId} eliminada con éxito`, {
-//               icon: "success",
-//             });
-//           } else {
-//             swal("Tu Orden seguirá guardada");
-//           }
-//         });
-
-//       }
-
-//       const calcularImpo = (e) => {
-//         // this code return the id value but the all row
-
-
-//         {/**No usar por el momento
-
-
-//         //Uso de deconstructor
-
-//         let itsRight = imporId === orderNumber;
-//         if (itsRight) {
-
-//           let costOrder = Number(cost);
-//           let insuranceOrder = Number(insurance);
-//           let freightOrder = Number(freight);
-
-//           valorIncoterm(costOrder, insuranceOrder, freightOrder)
-//         }
-
-//       }
-
-//       let idBtn = btn.closest('button').id;
-//       (idBtn === 'delete' ? deleteRow() : calcularImpo())
-
-//     })
-
-//   }
-*/}
 
 
 create_order.onclick = createNewOrder;
 
 
-
-
-
 //Funcion suma de costos - incorporación de condicionales
-const valorIncoterm = (valorCosto, valorSeguro, valorFlete) => {
+const valorIncoterm = (valorCosto, valorSeguro, valorFlete,shipper) => {
+
+  diplay_Import_Cal.innerHTML = `<form id='modal-import-operation'>
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="shipperOrder">Proveedor</label>
+      <input type="text" class="form-control"  value ='${shipper}'id="shipperOrder">
+    </div>
+    <div class="form-group col-md-6">
+      <label for="fobOrder">Valor FOB</label>
+      <input type="number" class="form-control" id="forbOrder" value='${valorCosto}'>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="freightOrder">Flete</label>
+    <input type="text" class="form-control" id="freightOrder" value='${valorFlete}'>
+  </div>
+  <div class="form-group">
+    <label for="insuranceOrder">Seguro</label>
+    <input type="text" class="form-control" id="insuranceOrder" value='${valorSeguro}'>
+  </div>
+    <div class="form-group col-md-4">
+      <label for="customOrder">Aduana</label>
+      <select id="customOrder" class="form-control">
+        <option selected>Choose...</option>
+        <option value='1'>Buenos Aires</option>
+        <option value='2'>Rio Grande</option>
+        <option value='3'>Ushuaia</option>
+      </select>
+    </div>
+  </div>
+  <button class="btn btn-primary"id='modal-operation'>Calcular</button>
+</form>`;
+  {/* 
   if (!valorCosto || valorCosto == 0 || valorCosto == '') {
     alert('Debe Ingresar valor de su mercaderí, intente nuevamente.')
   } else if (!valorFlete || valorFlete == 0 || valorFlete == '') {
@@ -427,7 +315,20 @@ const valorIncoterm = (valorCosto, valorSeguro, valorFlete) => {
     funcionParaAduana(aduana, valorAduana);
   }
   else alert('Los valores son incorrectos')
+  */}
+  document.getElementById('modal-operation').addEventListener('click',(e)=>{
+    e.preventDefault()
+    let aduanaCase = Number(customOrder.value); 
+    let valorAduana = (valorCosto + valorFlete + valorSeguro)
+    console.log(aduanaCase);
+    funcionParaAduana(aduanaCase,valorAduana)
+    form.reset();
+    document.getElementById('modal-import-operation').style.display='none';
+  } )
+  
 }
+
+
 
 //Función para eliminar elemento HTML onClick.
 let deleteDetails = document.getElementById('clean-screen');
@@ -442,7 +343,14 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
     case 1:
       let totalB = valorCalculo + (valorCalculo * 0.21) + (valorCalculo * 0.35);
       let impuestos = ((valorCalculo * 0.21) + (valorCalculo * 0.35)).toFixed(2);
-      alert('Recuerde de deberá cumpliar con los impuestos correspondientes')
+      
+      swal({
+        title: "Su importación deberá cumplir con los Impuestos",
+        text: "IVA tasa general del 21% \n Otros impuestos 35% ",
+        icon: "info",
+        button: "Aceptar",
+      });
+
       diplayFinalValue.innerHTML = `<div> 
                                           <p>El valor de su mercadería en Buenos Aires es: </p>
                                           <p>Impuesto: ${impuestos} </p>
@@ -455,6 +363,12 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
     case 2:
       let camion = Number(prompt('Ingrese el valor de camión'));
       let totalR = valorCalculo + camion;
+      swal({
+        title: "Se incluye el valor de flete doméstico",
+        text: `${camion}`,
+        icon: "info",
+        button: "Aceptar",
+      });
       diplayFinalValue.innerHTML = `<div> 
                                           <p>El valor de su mercadería en Rio Grande es: </p>
                                           <p>Valor del Transporte Terrestre: ${camion} </p>
@@ -463,9 +377,14 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                         </div>
                                         `;
-      alert('El valor en Aduana RGA es ' + totalR)
       break;
     case 3:
+      swal({
+        title: "Importación den Zona Económica",
+        text: "Libre de impuestos de importación",
+        icon: "info",
+        button: "Aceptar",
+      });
       diplayFinalValue.innerHTML = `<div> 
                                           <p>El valor de su mercadería en Zona Económica especial (Libre de impuestos) es: </p>
                                            <p>Valor en Aduana: ${valorCalculo} </p>
