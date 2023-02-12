@@ -3,6 +3,7 @@ let user = document.getElementById('user-dash');
 let _email = document.getElementById('email');
 let get_shipper = document.getElementById('shipper')
 let get_order = document.getElementById('order');
+let get_status = document.getElementById('status');
 let get_fob = document.getElementById('fob')
 let get_freight = document.getElementById('freight')
 let get_insurance = document.getElementById('insurance')
@@ -93,9 +94,10 @@ document.addEventListener('DOMContentLoaded', drawOrders);
 //Declaración de array para cargar las ordenes
 //Creación de constructor 
 class Order {
-  constructor(shipper, orderNumber, cost, freight, insurance, netKg) {
+  constructor(shipper, orderNumber, estado, cost, freight, insurance, netKg, ) {
     this.shipper = shipper.toUpperCase();
     this.orderNumber = orderNumber;
+    this.estado = estado;
     this.cost = cost;
     this.freight = freight;
     this.insurance = insurance;
@@ -113,6 +115,7 @@ const createNewOrder = (e) => {
   //Use de constructor
   let newOrder = new Order(get_shipper.value,
     get_order.value,
+    get_status.value,
     get_fob.value,
     get_freight.value,
     get_insurance.value,
@@ -120,6 +123,7 @@ const createNewOrder = (e) => {
 
   if (get_shipper.value == '' ||
     get_order.value == '' ||
+    get_fob.value == '' ||
     get_fob.value == '' ||
     get_freight.value == '' ||
     get_insurance.value == '' ||
@@ -157,6 +161,7 @@ const createNewOrder = (e) => {
     const getTable = document.querySelector('table');
     newRow.innerHTML += `<tr>
                                     <td value='${get_order.value}' >${get_order.value}</td>
+                                    <td value='${get_fob.value}'>${get_fob.value}<td>
                                     <td>${get_shipper.value}</td>
                                     <td>${get_fob.value}</td>
                                     <td>${get_freight.value}</td>
