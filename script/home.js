@@ -388,7 +388,11 @@ const funcionParaAduana = (valorCase, valorCalculo,truckOrder) => {
                                         `;
       break;
     default:
-      alert('Debes ingresar una aduana correcta');
+      swal({
+        title: `Debes seleccionar una Aduana?`,
+        icon: "info",
+        dangerMode: true,
+      })
   }
 }
 
