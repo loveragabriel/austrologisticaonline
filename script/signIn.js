@@ -80,7 +80,7 @@ const createNewUse = (e) => {
       title: `Usuario Creado`,
       icon: "success"
     });
-    location.href = '/pages/home.html';
+    location.href = '/austrologisticaonline/pages/home.html';
 
   }
 
