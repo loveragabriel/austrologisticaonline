@@ -21,7 +21,7 @@ const getTable = document.querySelector('table');
 let modal_form = document.getElementById('form');
 
 // function for modal import calculation
-let diplay_Import_Cal = document.getElementById('model-import-calculation');
+let display_Import_Cal = document.getElementById('modal-import-calculation');
 
 let ordersArray = JSON.parse(localStorage.getItem('dataOrders')) || [];
 //Function display Modal
@@ -248,7 +248,6 @@ getTable.addEventListener('click', (e) => {
       let shipperOrder = String(shipper);
       let netKgOrder = Number(netKg); 
       let unitValueOrder = Number(unitValue);
-
       valorIncoterm(costOrder, insuranceOrder, freightOrder, shipperOrder, netKgOrder,unitValueOrder)
     }
 
@@ -264,10 +263,13 @@ getTable.addEventListener('click', (e) => {
 create_order.onclick = createNewOrder;
 
 
+
+
+
 //Funcion suma de costos - incorporación de condicionales
 const valorIncoterm = (valorCosto, valorSeguro, valorFlete,shipper) => {
 
-  diplay_Import_Cal.innerHTML = `<form id='modal-import-operation'>
+  display_Import_Cal.innerHTML = `<form id='modal-import-operation'>
   <div class="form-row">
     <div class="form-group col-md-6">
       <label for="shipperOrder">Proveedor</label>
@@ -298,35 +300,20 @@ const valorIncoterm = (valorCosto, valorSeguro, valorFlete,shipper) => {
   </div>
   <button class="btn btn-primary"id='modal-operation'>Calcular</button>
 </form>`;
-  {/* 
-  if (!valorCosto || valorCosto == 0 || valorCosto == '') {
-    alert('Debe Ingresar valor de su mercaderí, intente nuevamente.')
-  } else if (!valorFlete || valorFlete == 0 || valorFlete == '') {
-    alert('Debe ingresar el valor del flete');
-  }
-  else if (valorCosto && !valorSeguro || valorSeguro == 0 || valorSeguro == '' && valorFlete) {
-    let valorAduana = valorCosto + (valorCosto * 0.01) + valorFlete;
-    alert('El valor del seguro será del 1% del costo de la mercadería ingresada');
-    let aduana = Number(prompt('Ingrese la aduana de destino \n 1. BUE \n 2. RGA \n 3. USH'));
-    funcionParaAduana(aduana, valorAduana);
-  } else if (valorCosto, valorSeguro, valorFlete) {
-    let valorAduana = valorCosto + valorSeguro + valorFlete;
-    let aduana = Number(prompt('Ingrese la aduana de destino \n 1. BUE \n 2. RGA \n 3. USH'));
-    funcionParaAduana(aduana, valorAduana);
-  }
-  else alert('Los valores son incorrectos')
-  */}
+ 
+ 
+
   document.getElementById('modal-operation').addEventListener('click',(e)=>{
     e.preventDefault()
+    
     let aduanaCase = Number(customOrder.value); 
     let valorAduana = (valorCosto + valorFlete + valorSeguro)
-    console.log(aduanaCase);
     funcionParaAduana(aduanaCase,valorAduana)
     form.reset();
     document.getElementById('modal-import-operation').style.display='none';
-  } )
-  
+})
 }
+
 
 
 
@@ -338,7 +325,7 @@ diplayFinalValue.addEventListener('click', () => {
 
 // Funcion para calcular valor aduana Uso de Switch 
 //Uso de innerHTML para dibujar elemento HTML en el DOM desde js. 
-const funcionParaAduana = (valorCase, valorCalculo) => {
+const funcionParaAduana = (valorCase, valorCalculo,truckOrder) => {
   switch (valorCase) {
     case 1:
       let totalB = valorCalculo + (valorCalculo * 0.21) + (valorCalculo * 0.35);
@@ -360,15 +347,16 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
                                         </div>
                                         `;
       break;
-    case 2:
-      let camion = Number(prompt('Ingrese el valor de camión'));
+    case 2: 
+    
+    swal("Ingrese el valor del transporte terrestre:", {
+      content: "input",
+    })
+    .then((value) => {
+      //swal(`You typed: ${value}`);
+      let camion = Number(value); 
       let totalR = valorCalculo + camion;
-      swal({
-        title: "Se incluye el valor de flete doméstico",
-        text: `${camion}`,
-        icon: "info",
-        button: "Aceptar",
-      });
+    
       diplayFinalValue.innerHTML = `<div> 
                                           <p>El valor de su mercadería en Rio Grande es: </p>
                                           <p>Valor del Transporte Terrestre: ${camion} </p>
@@ -377,6 +365,12 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                         </div>
                                         `;
+
+    });
+  
+
+     
+      
       break;
     case 3:
       swal({
