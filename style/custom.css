@@ -200,17 +200,24 @@ footer {
     display: none;
     position: absolute;
     flex-direction: column;
-    top: 30vh;
+    /* top: 30vh; */
     margin: 0 auto;
-     left: 30vw;
+     left: 20vw;
+     right: 20vw;
     /*right: 10vw; */
     background-color: white;
     padding: 1em;
     border-radius: 5px;
     box-shadow: 1px 1px 20px black;
     z-index: 2;
+    max-width: 50vw;
 }
-
+.form-control-cus{
+    border-radius: 5px;
+    border: 1px solid var(--blue-hover);
+    display: block;
+    width: 40vw;
+}
 .fa-x{
     cursor: pointer;
     position: absolute;
@@ -354,8 +361,37 @@ padding-bottom: 2em;
         z-index: -1;
     }
 
+    form-control-cus{
+        max-width: 10vw;
+        left: 10vw;
+    }
+
    
 }
+@media (max-width: 650px) {
+    
+    #form{
+        display: none;
+        position: absolute;
+        flex-direction: column;
+        z-index: 1;
+        background-color: white;
+        left: 10px;
+        right: 10px;
+    }
+    
+    .form-id{
+        min-width: 80vw;
+    }
+
+    #modal-import-operation{
+        left:   ;
+    }
+    }
+
+    .display-div{
+        display: flex   ;
+    }
 
 @media (max-width: 500px){
     .footer-imgtype{
@@ -399,36 +435,20 @@ padding: 5px;    max-width: 10px;
         zoom: 55%;
     }
 
+    #form{
+        max-width:80vw;
+    }
+    .form-control-cus{
+        width: 60vw;
+    }
+
 }
 
-@media (max-width: 280px){
+/* @media (max-width: 280px){
 
 
 body{
     zoom: 45%;
 }
-}
-@media (max-width: 650px) {
-    
-    #form{
-        display: none;
-        position: absolute;
-        flex-direction: column;
-        z-index: 1;
-        background-color: white;
-        left: 10px;
-        right: 10px;
-    }
-    
-    .form-id{
-        min-width: 80vw;
-    }
+} */
 
-    #modal-import-operation{
-        left:   ;
-    }
-    }
-
-    .display-div{
-        display: flex   ;
-    }
