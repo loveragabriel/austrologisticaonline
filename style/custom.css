@@ -428,3 +428,7 @@ body{
         left:   ;
     }
     }
+
+    .display-div{
+        display: flex;
+    }
