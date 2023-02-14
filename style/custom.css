@@ -329,7 +329,7 @@ padding-bottom: 2em;
 }
 
 /* Model import operation */
-#modal-import-operation{
+#modal-import-operation, #modal-import-operation-done{
     position:absolute;
     top: 4em;
     left: 10%;
@@ -430,5 +430,5 @@ body{
     }
 
     .display-div{
-        display: flex;
+        display: flex   ;
     }

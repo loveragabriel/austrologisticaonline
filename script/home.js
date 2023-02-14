@@ -12,7 +12,7 @@ let display_orders = document.getElementById('orders-created');
 let set_order_msj = document.querySelector('#orders-msj');
 let inner_col = document.getElementById('new-col');
 let delete_order = document.getElementById('delete-order');
-let diplayFinalValue = document.getElementById('display-final-result');
+let displayFinalValue = document.getElementById('display-final-result');
 let modal_newOrder = document.getElementById('modal-order');
 let display_orderModal = document.querySelector('.newOrder');
 let closeForm = document.querySelector('.fa-x');
@@ -27,7 +27,7 @@ let ordersArray = JSON.parse(localStorage.getItem('dataOrders')) || [];
 
 //Function that count orders created
 const listarOrders = () => {
-  listOrders.innerHTML = `<p>Ordenes: ${ordersArray.length}`
+  listOrders.innerHTML = `<span>Ordenes: ${ordersArray.length}</span>`
 }
 listarOrders();
 
@@ -298,7 +298,7 @@ const valorIncoterm = (valorCosto, valorSeguro, valorFlete, shipper) => {
 
   document.getElementById('modal-operation').addEventListener('click', (e) => {
     e.preventDefault()
-    diplayFinalValue.style.display = 'flex';
+    displayFinalValue.style.display = 'flex';
     let aduanaCase = Number(customOrder.value);
     let valorAduana = (valorCosto + valorFlete + valorSeguro)
     funcionParaAduana(aduanaCase, valorAduana)
@@ -309,8 +309,8 @@ const valorIncoterm = (valorCosto, valorSeguro, valorFlete, shipper) => {
 
 //Function for cleaning DOM after calculations
 let deleteDetails = document.getElementById('clean-screen');
-diplayFinalValue.addEventListener('click', () => {
-  diplayFinalValue.style.display = 'none';
+displayFinalValue.addEventListener('click', () => {
+  displayFinalValue.style.display = 'none';
 })
 
 
@@ -326,11 +326,12 @@ const funcionParaAduana = (valorCase, valorCalculo, truckOrder) => {
         icon: "info",
         button: "Aceptar",
       });
-      diplayFinalValue.innerHTML = `<div> 
+      displayFinalValue.innerHTML = `<div id="modal-import-operation-done"> 
                                           <p>El valor de su mercadería en Buenos Aires es: </p>
                                           <p>Impuesto: ${impuestos} </p>
                                           <p>Valor en Aduana: ${valorCalculo} </p>
-                                          <p>Valor Final: ${totalB} </p>
+                                          <hr>
+                                          <p class='font-weight-bold'>Valor Final: ${totalB} </p>
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                         </div>
                                         `;
@@ -348,11 +349,12 @@ const funcionParaAduana = (valorCase, valorCalculo, truckOrder) => {
           //swal(`You typed: ${value}`);
           let truck = Number(value);
           let totalR = valorCalculo + truck;
-          diplayFinalValue.innerHTML = `<div> 
+          displayFinalValue.innerHTML = `<div id="modal-import-operation-done">
                                           <p>El valor de su mercadería en Rio Grande es: </p>
                                           <p>Valor del Transporte Terrestre: ${truck} </p>
                                           <p>Valor en Aduana: ${valorCalculo} </p>
-                                          <p>Valor Final: ${totalR} </p>
+                                          <hr>
+                                          <p class='font-weight-bold'>Valor Final: ${totalR} </p>
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                         </div>
                                         `;
@@ -360,15 +362,16 @@ const funcionParaAduana = (valorCase, valorCalculo, truckOrder) => {
       break;
     case 3:
       swal({
-        title: "Importación den Zona Económica",
+        title: "Importación en Zona Económica",
         text: "Libre de impuestos de importación",
         icon: "info",
         button: "Aceptar",
       });
-      diplayFinalValue.innerHTML = `<div> 
+      displayFinalValue.innerHTML = `<div id="modal-import-operation-done">
                                           <p>El valor de su mercadería en Zona Económica especial (Libre de impuestos) es: </p>
                                            <p>Valor en Aduana: ${valorCalculo} </p>
-                                          <p>Valor Final: ${valorCalculo} </p>
+                                           <hr>
+                                          <p class='font-weight-bold'>Valor Final: ${valorCalculo} </p>
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                           </div>
                                         `;
