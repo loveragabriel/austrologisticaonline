@@ -266,11 +266,11 @@ create_order.onclick = createNewOrder;
 const valorIncoterm = (valorCosto, valorSeguro, valorFlete, shipper) => {
   display_Import_Cal.innerHTML = `<form id='modal-import-operation'>
   <div class="form-row">
-    <div class="form-group col-md-6">
+    <div class="form-group ">
       <label for="shipperOrder">Proveedor</label>
       <input type="text" class="form-control"  value ='${shipper}'id="shipperOrder">
     </div>
-    <div class="form-group col-md-6">
+    <div class="form-group ">
       <label for="fobOrder">Valor FOB</label>
       <input type="number" class="form-control" id="forbOrder" value='${valorCosto}'>
     </div>
@@ -293,7 +293,7 @@ const valorIncoterm = (valorCosto, valorSeguro, valorFlete, shipper) => {
       </select>
     </div>
   </div>
-  <button class="btn btn-primary"id='modal-operation'>Calcular</button>
+  <button class="btn btn-primary m-3"id='modal-operation'>Calcular</button>
 </form>`;
 
   document.getElementById('modal-operation').addEventListener('click', (e) => {
