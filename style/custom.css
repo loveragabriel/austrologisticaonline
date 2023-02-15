@@ -202,8 +202,9 @@ footer {
     padding: 1em;
     border-radius: 5px;
     box-shadow: 1px 1px 20px black;
-    max-width: 50vw;
+    max-width: 70vw;
 }
+
 
 
 /* FORM */
@@ -455,6 +456,10 @@ padding: 5px;    max-width: 10px;
     }
     .form-control-cus{
         width: 60vw;
+    }
+
+    #sign-form{
+        max-width: 100vw;
     }
 
 }

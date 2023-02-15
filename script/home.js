@@ -23,7 +23,7 @@ let display_Import_Cal = document.getElementById('modal-import-calculation');
 
 
 //Function for getting orders in localStorage
-let ordersArray = JSON.parse(localStorage.getItem('dataOrders')) || [];
+const ordersArray = JSON.parse(localStorage.getItem('dataOrders')) || [];
 
 //Function that count orders created
 const listarOrders = () => {
