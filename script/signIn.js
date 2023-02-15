@@ -13,6 +13,7 @@ let capital = document.getElementById("capital");
 let number = document.getElementById("number");
 let length = document.getElementById("length");
 
+
 //Se crea Array para guardar datos de usuario en sessionStorage
 let userDataBase = [];
 

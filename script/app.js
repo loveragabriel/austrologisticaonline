@@ -3,7 +3,7 @@ const myModal = document.getElementById('myModal')
 const myInput = document.getElementById('myInput');
 let formClose = document.querySelector('.fa-x')
 let openForm = document.getElementById('open-form');
-let getForm = document.getElementById('form');
+let getForm = document.getElementById('sign-form');
 
 openForm.addEventListener('click',()=>{
   getForm.style.display = 'flex'

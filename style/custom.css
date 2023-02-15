@@ -189,12 +189,26 @@ footer {
 }
 
 
-
-
-
+#sign-form{
+    display: none;
+    position: absolute;
+    flex-direction: column;
+    top: 30vh;
+    margin: 0 auto;
+     left: 20vw;
+     right: 20vw;
+    right: 10vw; 
+    background-color: white;
+    padding: 1em;
+    border-radius: 5px;
+    box-shadow: 1px 1px 20px black;
+    max-width: 50vw;
+}
 
 
 /* FORM */
+
+
 
 #form{
     display: none;
@@ -203,8 +217,8 @@ footer {
     /* top: 30vh; */
     margin: 0 auto;
      left: 20vw;
-     right: 20vw;
-    /*right: 10vw; */
+     /* right: 20vw; */
+    right: 10vw; 
     background-color: white;
     padding: 1em;
     border-radius: 5px;
@@ -212,6 +226,7 @@ footer {
     z-index: 2;
     max-width: 50vw;
 }
+
 .form-control-cus{
     border-radius: 5px;
     border: 1px solid var(--blue-hover);
