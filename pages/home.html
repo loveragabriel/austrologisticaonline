@@ -54,11 +54,13 @@
    
     <table class="table sm" id="order-table">
       <thead class="thead-light">
-        <tr>
+        <tr class="table-primary">
           <th>#Orden</th>
           <th>Proveedor</th>
           <th>Costo</th>
           <th>Flete</th>
+          <th>País Origen</th>
+          <th>Puerto</th>          
           <th>Seguro</th>
           <th>KG/Net</th>
           <th>Unit/Precio</th>
@@ -97,6 +99,18 @@
         </label>
       </div>
       <div class="form-group">
+        <label class="form-label">País Origen:
+          <select class="form-control-cust"   type="number" id="selection">
+            <option id="country">...</option>
+          </select> 
+        </label>
+        <label class="form-label">Puerto:
+          <select class="form-control-cust"   type="number" id="un_locode">
+            <option id="portCode">...</option>
+          </select> 
+        </label>
+      </div>
+      <div class="form-group">
         <label class="form-label">Valor del seguro*:
           <input class="form-control-cust"  type="number" id="insurance">
         </label>
@@ -110,9 +124,7 @@
     </form>
     <!-- Modal for Calculate orden -->
     <div id="modal-import-calculation">
-
     </div>
-    
   </main>
   <script defer src="../script/home.js"></script>
   <script src="/script/logIn.js"></script>

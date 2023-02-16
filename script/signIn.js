@@ -15,7 +15,7 @@ let length = document.getElementById("length");
 
 
 //Se crea Array para guardar datos de usuario en localStorage
-let userDataBase = [];
+const userDataBase = [];
 
 // Función para registrar un nuevo usuario. 
 //Validación de datos 

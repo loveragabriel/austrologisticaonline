@@ -3,7 +3,10 @@ let user = document.getElementById('user-dash');
 let _email = document.getElementById('email');
 let get_shipper = document.getElementById('shipper')
 let get_order = document.getElementById('order');
-let get_fob = document.getElementById('fob')
+
+let get_fob = document.getElementById('fob');
+let get_country = document.getElementById('country')
+let get_port = document.getElementById('portCode')
 let get_freight = document.getElementById('freight')
 let get_insurance = document.getElementById('insurance')
 let get_netkg = document.getElementById('netkg');
@@ -20,7 +23,41 @@ let listOrders = document.getElementById('total-orders');
 const getTable = document.querySelector('table');
 let modal_form = document.getElementById('form');
 let display_Import_Cal = document.getElementById('modal-import-calculation');
+let select = document.getElementById('selection');
+let port_code = document.getElementById('un_locode');
 
+
+//Fetch API
+window.onload=()=>{
+  fetch(`https://restcountries.com/v3.1/all`)
+  .then(res => res.json())
+  .then(data=> {
+      let countriesList = data; 
+        let array = []; 
+        for (let i= 1 ; i < countriesList.length; i++)
+            array.push(countriesList[i]['name']['common'])
+          array.sort(); 
+          for(let h = 0; h< array.length; h++){
+            select.innerHTML += `<option>${array[h]}</option>`
+          }
+               
+              })
+      }
+ 
+      select.addEventListener('change', (e)=>{
+        let pais = e.target.value; 
+        un_locode(pais); 
+      })
+
+function un_locode(code){
+      fetch(`https://port-api.com/port/search/${code}`)
+      .then(res => res.json())
+      .then(data=> {let array = data['features'];
+              for (let i= 1 ; i < array.length; i++)
+              if( array[i]['properties']['un_locode'] != undefined)
+              port_code.innerHTML += `<option>${array[i]['properties']['un_locode']}</option>`
+                })
+            }
 
 //Function for getting orders in localStorage
 const ordersArray = JSON.parse(localStorage.getItem('dataOrders')) || [];
@@ -32,14 +69,14 @@ const listarOrders = () => {
 listarOrders();
 
 //Function display Welcome
-Toastify({
-  text: `Bienvenid@`,
-  offset: {
-    duration: 2000,
-    x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-    y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-  },
-}).showToast();
+// Toastify({
+//   text: `Bienvenid@`,
+//   offset: {
+//     duration: 2000,
+//     x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
+//     y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
+//   },
+// }).showToast();
 
 //Function display form for creating new order
 modal_newOrder.addEventListener('click', () => {
@@ -74,6 +111,9 @@ const drawOrders = () => {
                                     <td>${ordersArray[i]['shipper']}</td>
                                     <td>${ordersArray[i]['cost']}</td>
                                     <td>${ordersArray[i]['freight']}</td>
+                                    <td>${ordersArray[i]['orderCountry']}</td>
+                                    
+                                    <td>${ordersArray[i]['portOrder']}</td>
                                     <td>${ordersArray[i]['insurance']}</td>
                                     <td>${ordersArray[i]['netKg']}</td>
                                     <td>${ordersArray[i]['unitValue']}</td>
@@ -96,11 +136,13 @@ document.addEventListener('DOMContentLoaded', drawOrders);
 
 //Constructor for creating new orders
 class Order {
-  constructor(shipper, orderNumber, cost, freight, insurance, netKg) {
+  constructor(shipper, orderNumber, cost,freight, orderCountry, portOrder, insurance, netKg) {
     this.shipper = shipper.toUpperCase();
     this.orderNumber = orderNumber;
-    this.cost = cost;
+    this.cost = cost;    
     this.freight = freight;
+    this.orderCountry = orderCountry; 
+    this.portOrder = portOrder; 
     this.insurance = insurance;
     this.netKg = netKg;
     this.unitValue = this.getUnitValue();
@@ -114,17 +156,23 @@ class Order {
 //Function that create a new order and display and add it in the table orders
 const createNewOrder = (e) => {
   e.preventDefault()
+
   // Use constructor
-  let newOrder = new Order(get_shipper.value,
+  let newOrder = new Order(
+    get_shipper.value,
     get_order.value,
     get_fob.value,
     get_freight.value,
+    select.value,
+    port_code.value,
     get_insurance.value,
     get_netkg.value,);
 
   if (get_shipper.value == '' ||
     get_order.value == '' ||
     get_fob.value == '' ||
+    select.value== '' ||
+    port_code.value == '' ||
     get_freight.value == '' ||
     get_insurance.value == '' ||
     get_netkg.value == '') {
@@ -162,7 +210,9 @@ const createNewOrder = (e) => {
                                     <td value='${get_order.value}' >${get_order.value}</td>
                                     <td>${get_shipper.value}</td>
                                     <td step='0.01'>${get_fob.value}</td>
+                                    <td>${select.value}</td>
                                     <td>${get_freight.value}</td>
+                                    <td>${port_code.value}</td>
                                     <td>${get_insurance.value}</td>
                                     <td>${get_netkg.value}</td>
                                     <td>${newOrder.getUnitValue().toFixed(2)}</td>
@@ -238,7 +288,7 @@ getTable.addEventListener('click', (e) => {
     //Loop for selecting the values of the order
     for (let i = 0; i < rowIndexLocalStorage.length; i++) {
       //Deconstructor for managing orders´ values
-      let { cost, freight, insurance, netKg, orderNumber, shipper, unitValue } = rowIndexLocalStorage[i];
+      let { cost, freight, insurance, netKg, orderNumber, shipper, unitValue, orderCountry, portOrder} = rowIndexLocalStorage[i];
       let itsRight = imporId === orderNumber;
       if (itsRight) {
         let costOrder = Number(cost);
@@ -247,8 +297,11 @@ getTable.addEventListener('click', (e) => {
         let shipperOrder = String(shipper);
         let netKgOrder = Number(netKg);
         let unitValueOrder = Number(unitValue);
+        let countryOrder = String(orderCountry);
+        let orderPort = String(portOrder)
+
         //Call fanction for calculations with the value retreived
-        valorIncoterm(costOrder, insuranceOrder, freightOrder, shipperOrder, netKgOrder, unitValueOrder)
+        valorIncoterm(costOrder, insuranceOrder, freightOrder, shipperOrder, netKgOrder, unitValueOrder,countryOrder,orderPort)
       }
 
     }
@@ -315,7 +368,7 @@ displayFinalValue.addEventListener('click', () => {
 
 
 // Function with Switch statement for do calculations according to the customs selected
-const funcionParaAduana = (valorCase, valorCalculo, truckOrder) => {
+const funcionParaAduana = (valorCase, valorCalculo) => {
   switch (valorCase) {
     case 1:
       let totalB = valorCalculo + (valorCalculo * 0.21) + (valorCalculo * 0.35);
@@ -386,5 +439,4 @@ const funcionParaAduana = (valorCase, valorCalculo, truckOrder) => {
 }
 
 closeDash.addEventListener('click', () => {
-  location.href = '../index.html';
-})
+  location.href = '../index.html';})
