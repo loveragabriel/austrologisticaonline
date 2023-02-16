@@ -380,10 +380,10 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
       });
       displayFinalValue.innerHTML = `<div id="modal-import-operation-done"> 
                                           <p>El valor de su mercadería en Buenos Aires es: </p>
-                                          <p>Impuesto: ${impuestos} </p>
-                                          <p>Valor en Aduana: ${valorCalculo} </p>
+                                          <p>Impuesto: $ ${impuestos} </p>
+                                          <p>Valor en Aduana: $ ${valorCalculo} </p>
                                           <hr>
-                                          <p class='font-weight-bold'>Valor Final: ${totalB} </p>
+                                          <p class='font-weight-bold'>Valor Final: $ ${totalB} </p>
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                         </div>
                                         `;
@@ -403,10 +403,10 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
           let totalR = valorCalculo + truck;
           displayFinalValue.innerHTML = `<div id="modal-import-operation-done">
                                           <p>El valor de su mercadería en Rio Grande es: </p>
-                                          <p>Valor del Transporte Terrestre: ${truck} </p>
-                                          <p>Valor en Aduana: ${valorCalculo} </p>
+                                          <p>Valor del Transporte Terrestre: $ ${truck} </p>
+                                          <p>Valor en Aduana: $ ${valorCalculo} </p>
                                           <hr>
-                                          <p class='font-weight-bold'>Valor Final: ${totalR} </p>
+                                          <p class='font-weight-bold'>Valor Final: $ ${totalR} </p>
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                         </div>
                                         `;
@@ -421,9 +421,9 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
       });
       displayFinalValue.innerHTML = `<div id="modal-import-operation-done">
                                           <p>El valor de su mercadería en Zona Económica especial (Libre de impuestos) es: </p>
-                                           <p>Valor en Aduana: ${valorCalculo} </p>
+                                           <p>Valor en Aduana: $ ${valorCalculo} </p>
                                            <hr>
-                                          <p class='font-weight-bold'>Valor Final: ${valorCalculo} </p>
+                                          <p class='font-weight-bold'>Valor Final: $ ${valorCalculo} </p>
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                           </div>
                                         `;
