@@ -112,7 +112,6 @@ const drawOrders = () => {
                                     <td>${ordersArray[i]['cost']}</td>
                                     <td>${ordersArray[i]['freight']}</td>
                                     <td>${ordersArray[i]['orderCountry']}</td>
-                                    
                                     <td>${ordersArray[i]['portOrder']}</td>
                                     <td>${ordersArray[i]['insurance']}</td>
                                     <td>${ordersArray[i]['netKg']}</td>
@@ -208,14 +207,14 @@ const createNewOrder = (e) => {
     const getTable = document.querySelector('table');
     newRow.innerHTML += `<tr>
                                     <td value='${get_order.value}' >${get_order.value}</td>
-                                    <td>${get_shipper.value}</td>
-                                    <td step='0.01'>${get_fob.value}</td>
-                                    <td>${select.value}</td>
-                                    <td>${get_freight.value}</td>
-                                    <td>${port_code.value}</td>
-                                    <td>${get_insurance.value}</td>
-                                    <td>${get_netkg.value}</td>
-                                    <td>${newOrder.getUnitValue().toFixed(2)}</td>
+                                    <td class='text-center'>${get_shipper.value}</td>
+                                    <td class='text-center' step='0.01'>${get_fob.value}</td>
+                                    <td class='text-center'>${get_freight.value}</td>
+                                    <td class='text-center'>${select.value}</td>
+                                    <td class='text-center'>${port_code.value}</td>
+                                    <td class='text-center'>${get_insurance.value}</td>
+                                    <td class='text-center'>${get_netkg.value}</td>
+                                    <td class='text-center'>${newOrder.getUnitValue().toFixed(2)}</td>
                                     <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
                                     <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
                                     </tr>
