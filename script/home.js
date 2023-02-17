@@ -3,7 +3,6 @@ let user = document.getElementById('user-dash');
 let _email = document.getElementById('email');
 let get_shipper = document.getElementById('shipper')
 let get_order = document.getElementById('order');
-
 let get_fob = document.getElementById('fob');
 let get_country = document.getElementById('country')
 let get_port = document.getElementById('portCode')
@@ -43,7 +42,7 @@ window.onload=()=>{
                
               })
       }
- 
+
       select.addEventListener('change', (e)=>{
         let pais = e.target.value; 
         un_locode(pais); 
@@ -68,16 +67,6 @@ const listarOrders = () => {
 }
 listarOrders();
 
-//Function display Welcome
-// Toastify({
-//   text: `Bienvenid@`,
-//   offset: {
-//     duration: 2000,
-//     x: 50, // horizontal axis - can be a number or a string indicating unity. eg: '2em'
-//     y: 10 // vertical axis - can be a number or a string indicating unity. eg: '2em'
-//   },
-// }).showToast();
-
 //Function display form for creating new order
 modal_newOrder.addEventListener('click', () => {
   display_orderModal.style.display = 'flex'
@@ -96,7 +85,6 @@ const deleteRowLocalStorage = (id) => {
     getArrayLocalStorage.splice(rowIndexLocalStorage, 1);
   }
   localStorage.setItem("dataOrders", JSON.stringify(getArrayLocalStorage));
-
 }
 
 //Function drawOrder on screen 

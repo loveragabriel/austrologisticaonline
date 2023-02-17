@@ -15,7 +15,7 @@ let length = document.getElementById("length");
 
 
 //Se crea Array para guardar datos de usuario en localStorage
-const userDataBase = [];
+const userDataBase = JSON.parse(localStorage.getItem('dataUser')) || [];
 
 // Función para registrar un nuevo usuario. 
 //Validación de datos 
@@ -72,7 +72,7 @@ const createNewUse = (e) => {
     const saveNewUser = (validation_name, validation_email, validation_password, confirm_password) => {
       let nuevoUsuario = new User(validation_name, validation_email, validation_password, confirm_password)
       userDataBase.push(nuevoUsuario);
-      const dataUser = localStorage.setItem(`${validation_email}`, JSON.stringify(nuevoUsuario));
+      localStorage.setItem(`dataUser`, JSON.stringify(userDataBase));
       const getUser = localStorage.getItem(`${validation_email}`);
       console.log(JSON.parse(getUser));
     }
