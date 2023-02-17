@@ -232,7 +232,11 @@ footer {
     border-radius: 5px;
     border: 1px solid var(--blue-hover);
     display: block;
-    width: 40vw;
+    width: 45vw;
+}
+
+#selection{
+    width: 70%;
 }
 .fa-x{
     cursor: pointer;
@@ -464,11 +468,4 @@ padding: 5px;    max-width: 10px;
 
 }
 
-/* @media (max-width: 280px){
-
-
-body{
-    zoom: 45%;
-}
-} */
 

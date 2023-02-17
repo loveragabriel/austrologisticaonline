@@ -343,7 +343,7 @@ const valorIncoterm = (valorCosto, valorSeguro, valorFlete, shipper) => {
     let valorAduana = (valorCosto + valorFlete + valorSeguro)
     funcionParaAduana(aduanaCase, valorAduana)
     form.reset();
-    document.getElementById('modal-import-operation').style.display = 'none';
+    document.getElementById('modal-import-operation').style.display = 'none';    
   })
 }
 
@@ -371,7 +371,7 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
                                           <p>Impuesto: $ ${impuestos} </p>
                                           <p>Valor en Aduana: $ ${valorCalculo} </p>
                                           <hr>
-                                          <p class='font-weight-bold'>Valor Final: $ ${totalB} </p>
+                                          <p class='font-weight-bold'>Valor Final: $ ${totalB.toFixed(2)} </p>
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                         </div>
                                         `;
@@ -394,7 +394,7 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
                                           <p>Valor del Transporte Terrestre: $ ${truck} </p>
                                           <p>Valor en Aduana: $ ${valorCalculo} </p>
                                           <hr>
-                                          <p class='font-weight-bold'>Valor Final: $ ${totalR} </p>
+                                          <p class='font-weight-bold'>Valor Final: $ ${totalR.toFixed(2)} </p>
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                         </div>
                                         `;
@@ -411,7 +411,7 @@ const funcionParaAduana = (valorCase, valorCalculo) => {
                                           <p>El valor de su mercadería en Zona Económica especial (Libre de impuestos) es: </p>
                                            <p>Valor en Aduana: $ ${valorCalculo} </p>
                                            <hr>
-                                          <p class='font-weight-bold'>Valor Final: $ ${valorCalculo} </p>
+                                          <p class='font-weight-bold'>Valor Final: $ ${valorCalculo.toFixed(2)} </p>
                                           <button id='clean-screen' class="btn btn-secondary">Limpiar</button>
                                           </div>
                                         `;
