@@ -74,15 +74,17 @@ const createNewUse = (e) => {
       userDataBase.push(nuevoUsuario);
       localStorage.setItem(`dataUser`, JSON.stringify(userDataBase));
       const getUser = localStorage.getItem(`${validation_email}`);
-      console.log(JSON.parse(getUser));
     }
     saveNewUser(validation_name.value, validation_email.value, validation_password.value, validation_password_conf.value);
+    if()
     swal({
       title: `Usuario Creado`,
       icon: "success",
       button: "Aceptar",
     });
-    location.href = '/austrologisticaonline/pages/home.html';
+    setTimeout(()=>{
+      location.href = '/austrologisticaonline/pages/home.html';
+    },2000 )
 
   }
 

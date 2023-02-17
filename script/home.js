@@ -103,9 +103,9 @@ const drawOrders = () => {
                                     <td>${ordersArray[i]['portOrder']}</td>
                                     <td>${ordersArray[i]['insurance']}</td>
                                     <td>${ordersArray[i]['netKg']}</td>
-                                    <td>${ordersArray[i]['unitValue']}</td>
-                                    <td><button id="delete"value='${ordersArray[i]['orderNumber']}' class='btn btn-danger btn-sm'>Eliminar</button></td>
-                                    <td><button id="importar" value='${ordersArray[i]['orderNumber']}' class='btn btn-success btn-sm'>Calcular</button></td>
+                                    <td>${ordersArray[i]['unitValue'].toFixed(2)}</td>
+                                    <td><button id="importar" value='${ordersArray[i]['orderNumber']}' class='btn btn-success btn-sm'><i class="fa-solid fa-calculator"></i></button></td>
+                                    <td><button id="delete"value='${ordersArray[i]['orderNumber']}' class='btn btn-danger btn-sm'><i class="fa-solid fa-trash"></i></button></td>
                                     </tr>
                 `
   }
@@ -203,8 +203,8 @@ const createNewOrder = (e) => {
                                     <td class='text-center'>${get_insurance.value}</td>
                                     <td class='text-center'>${get_netkg.value}</td>
                                     <td class='text-center'>${newOrder.getUnitValue().toFixed(2)}</td>
-                                    <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'>Eliminar</button></td>
-                                    <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'>Calcular</button></td>
+                                    <td><button id="importar" value='${get_order.value}' class='btn btn-success btn-sm'><i class="fa-solid fa-calculator"></i></button></td>
+                                    <td><button id="delete"value='${get_order.value}' class='btn btn-danger btn-sm'><i class="fa-solid fa-trash"></i></button></td>
                                     </tr>
                                   
                 `
