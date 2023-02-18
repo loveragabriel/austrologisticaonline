@@ -41,6 +41,9 @@ window.onload=()=>{
           }
                
               })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
       }
 
       select.addEventListener('change', (e)=>{
@@ -242,7 +245,9 @@ getTable.addEventListener('click', (e) => {
           listarOrders();
           localStorage.removeItem(`${imporId}`);
           btn.closest('tr').remove()
-          location.reload()
+          setTimeout(()=>{
+            location.reload()
+          },2000)
           listOrders.innerHTML = `
                               <p>Ordenes: ${localStorage.length}`
           if (localStorage.length == 0) {
